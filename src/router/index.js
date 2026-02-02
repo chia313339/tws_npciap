@@ -1,0 +1,63 @@
+import { createRouter, createWebHistory } from 'vue-router'
+
+import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import ApplyView from '../views/ApplyView.vue'
+import SolutionsView from '../views/SolutionsView.vue'
+import AICustomerServiceView from '../views/AICustomerServiceView.vue'
+import CopyrightView from '../views/CopyrightView.vue'
+import AccessibilityView from '../views/AccessibilityView.vue'
+import PrivacyView from '../views/PrivacyView.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: AboutView,
+  },
+  {
+    path: '/apply',
+    name: 'apply',
+    component: ApplyView,
+  },
+  {
+    path: '/solutions',
+    name: 'solutions',
+    component: SolutionsView,
+  },
+  {
+    path: '/ai-service',
+    name: 'ai-service',
+    component: AICustomerServiceView,
+  },
+  {
+    path: '/copyright',
+    name: 'copyright',
+    component: CopyrightView,
+  },
+  {
+    path: '/accessibility',
+    name: 'accessibility',
+    component: AccessibilityView,
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: PrivacyView,
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+  scrollBehavior() {
+    return { top: 0, behavior: 'smooth' }
+  },
+})
+
+export default router
