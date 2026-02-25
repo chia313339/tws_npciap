@@ -8,6 +8,7 @@ import AICustomerServiceView from '../views/AICustomerServiceView.vue'
 import CopyrightView from '../views/CopyrightView.vue'
 import AccessibilityView from '../views/AccessibilityView.vue'
 import PrivacyView from '../views/PrivacyView.vue'
+import ContactFormView from '../views/ContactFormView.vue'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/privacy',
     name: 'privacy',
     component: PrivacyView,
+  },
+  {
+    path: '/contact-form',
+    name: 'contact-form',
+    component: ContactFormView,
   },
 ]
 

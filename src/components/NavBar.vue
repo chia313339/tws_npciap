@@ -9,6 +9,7 @@ const navLinks = [
   { label: '關於計畫', to: '/about' },
   { label: '申請須知', to: '/apply' },
   { label: '解決方案', to: '/solutions' },
+  { label: '聯繫表單', to: '/contact-form' },
   { label: 'AI客服', to: '/ai-service' },
   { label: '版權聲明', to: '/copyright' },
   { label: '無障礙標章', to: '/accessibility' },
