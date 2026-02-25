@@ -9,6 +9,8 @@ import CopyrightView from '../views/CopyrightView.vue'
 import AccessibilityView from '../views/AccessibilityView.vue'
 import PrivacyView from '../views/PrivacyView.vue'
 import ContactFormView from '../views/ContactFormView.vue'
+import NotFoundView from '../views/NotFoundView.vue'
+import MaintenanceView from '../views/MaintenanceView.vue'
 
 const routes = [
   {
@@ -56,6 +58,20 @@ const routes = [
     name: 'contact-form',
     component: ContactFormView,
   },
+  {
+    path: '/404',
+    name: 'not-found',
+    component: NotFoundView,
+  },
+  {
+    path: '/maintenance',
+    name: 'maintenance',
+    component: MaintenanceView,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
+  },
 ]
 
 const router = createRouter({
@@ -64,6 +80,20 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0, behavior: 'smooth' }
   },
+})
+
+const isMaintenanceMode = String(import.meta.env.VITE_MAINTENANCE_MODE || '').toLowerCase() === 'true'
+
+router.beforeEach((to) => {
+  if (to.path === '/maintenance') {
+    return true
+  }
+
+  if (isMaintenanceMode) {
+    return '/maintenance'
+  }
+
+  return true
 })
 
 export default router
