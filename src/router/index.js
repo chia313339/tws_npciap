@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import ScheduleView from '../views/ScheduleView.vue'
+import FAQView from '../views/FAQView.vue'
 import ApplyView from '../views/ApplyView.vue'
 import SolutionsView from '../views/SolutionsView.vue'
 import AICustomerServiceView from '../views/AICustomerServiceView.vue'
@@ -9,19 +10,29 @@ import CopyrightView from '../views/CopyrightView.vue'
 import AccessibilityView from '../views/AccessibilityView.vue'
 import PrivacyView from '../views/PrivacyView.vue'
 import ContactFormView from '../views/ContactFormView.vue'
+import SearchView from '../views/SearchView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import MaintenanceView from '../views/MaintenanceView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    redirect: '/about',
   },
   {
     path: '/about',
     name: 'about',
     component: AboutView,
+  },
+  {
+    path: '/schedule',
+    name: 'schedule',
+    component: ScheduleView,
+  },
+  {
+    path: '/faq',
+    name: 'faq',
+    component: FAQView,
   },
   {
     path: '/apply',
@@ -57,6 +68,11 @@ const routes = [
     path: '/contact-form',
     name: 'contact-form',
     component: ContactFormView,
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchView,
   },
   {
     path: '/404',

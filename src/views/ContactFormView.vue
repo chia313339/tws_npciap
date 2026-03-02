@@ -115,7 +115,11 @@ const handleSubmit = async () => {
   <section class="page-hero">
     <div class="container">
       <div class="page-header">
-        <h1>聯繫表單</h1>
+        <header class="title-row">
+          <span class="title-line"></span>
+          <h1>聯繫表單</h1>
+          <span class="title-line"></span>
+        </header>
         <p>填寫資料後，我們將盡快與您聯繫。</p>
       </div>
 

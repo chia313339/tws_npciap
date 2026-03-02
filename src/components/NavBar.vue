@@ -1,12 +1,18 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const isOpen = ref(false)
+const navRoot = ref(null)
 const route = useRoute()
 
-const navLinks = [
+const sideLinks = [
   { label: '關於計畫', to: '/about' },
+  { label: '計畫時程', to: '/schedule' },
+  { label: 'FAQ', to: '/faq' },
+]
+
+const mainLinks = [
   { label: '申請須知', to: '/apply' },
   { label: '解決方案', to: '/solutions' },
   { label: '聯繫表單', to: '/contact-form' },
@@ -14,11 +20,32 @@ const navLinks = [
   { label: '版權聲明', to: '/copyright' },
   { label: '無障礙標章', to: '/accessibility' },
   { label: '隱私權條款', to: '/privacy' },
+  { label: '搜尋', to: '/search' },
 ]
+
+const mobileLinks = computed(() => [...sideLinks, ...mainLinks])
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
 }
+
+const handleOutsidePointer = (event) => {
+  if (!isOpen.value || !navRoot.value) {
+    return
+  }
+
+  if (event.target instanceof Node && !navRoot.value.contains(event.target)) {
+    isOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('pointerdown', handleOutsidePointer)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('pointerdown', handleOutsidePointer)
+})
 
 watch(
   () => route.path,
@@ -29,14 +56,23 @@ watch(
 </script>
 
 <template>
-  <header class="site-nav">
+  <header ref="navRoot" class="site-nav">
     <div class="container nav-inner">
-      <RouterLink class="brand hover-scale" to="/">
+      <RouterLink class="brand hover-scale" to="/about">
         <span class="brand-title">
           <span class="brand-line brand-line--small">新北產業</span>
           <span class="brand-line">AI化輔導計劃</span>
         </span>
       </RouterLink>
+
+      <nav class="nav-links nav-links--desktop">
+        <template v-for="(link, index) in mainLinks" :key="link.to">
+          <span v-if="index > 0" class="nav-separator">|</span>
+          <RouterLink class="nav-link hover-scale" :to="link.to">
+            {{ link.label }}
+          </RouterLink>
+        </template>
+      </nav>
 
       <button
         class="menu-toggle hover-scale"
@@ -51,9 +87,9 @@ watch(
         <span class="bar"></span>
       </button>
 
-      <nav id="primary-nav" class="nav-links" :class="{ open: isOpen }">
+      <nav id="primary-nav" class="nav-links nav-links--mobile" :class="{ open: isOpen }">
         <RouterLink
-          v-for="link in navLinks"
+          v-for="link in mobileLinks"
           :key="link.to"
           class="nav-link hover-scale"
           :to="link.to"
