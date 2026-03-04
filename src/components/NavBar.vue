@@ -13,13 +13,11 @@ const sideLinks = [
 ]
 
 const mainLinks = [
-  { label: '申請須知', to: '/apply' },
-  { label: '解決方案', to: '/solutions' },
-  { label: '聯繫表單', to: '/contact-form' },
-  { label: 'AI客服', to: '/ai-service' },
-  { label: '版權聲明', to: '/copyright' },
-  { label: '無障礙標章', to: '/accessibility' },
-  { label: '隱私權條款', to: '/privacy' },
+  { label: '方案分類與供應商', to: '/solutions' },
+  { label: '聯絡我們', to: '/contact-us' },
+  { label: '新北市政府', href: 'https://www.ntpc.gov.tw/ch/index.jsp' },
+  { label: '經濟發展局', href: 'https://www.economic.ntpc.gov.tw/' },
+  { label: '台智雲TWAI', href: 'https://www.twcloud.ai/' },
   { label: '搜尋', to: '/search' },
 ]
 
@@ -66,9 +64,18 @@ watch(
       </RouterLink>
 
       <nav class="nav-links nav-links--desktop">
-        <template v-for="(link, index) in mainLinks" :key="link.to">
+        <template v-for="(link, index) in mainLinks" :key="link.to || link.href">
           <span v-if="index > 0" class="nav-separator">|</span>
-          <RouterLink class="nav-link hover-scale" :to="link.to">
+          <a
+            v-if="link.href"
+            class="nav-link hover-scale"
+            :href="link.href"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ link.label }}
+          </a>
+          <RouterLink v-else class="nav-link hover-scale" :to="link.to">
             {{ link.label }}
           </RouterLink>
         </template>
@@ -88,14 +95,20 @@ watch(
       </button>
 
       <nav id="primary-nav" class="nav-links nav-links--mobile" :class="{ open: isOpen }">
-        <RouterLink
-          v-for="link in mobileLinks"
-          :key="link.to"
-          class="nav-link hover-scale"
-          :to="link.to"
-        >
-          {{ link.label }}
-        </RouterLink>
+        <template v-for="link in mobileLinks" :key="link.to || link.href">
+          <a
+            v-if="link.href"
+            class="nav-link hover-scale"
+            :href="link.href"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ link.label }}
+          </a>
+          <RouterLink v-else class="nav-link hover-scale" :to="link.to">
+            {{ link.label }}
+          </RouterLink>
+        </template>
       </nav>
     </div>
   </header>

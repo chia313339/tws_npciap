@@ -5,6 +5,7 @@ import ScheduleView from '../views/ScheduleView.vue'
 import FAQView from '../views/FAQView.vue'
 import ApplyView from '../views/ApplyView.vue'
 import SolutionsView from '../views/SolutionsView.vue'
+import ContactUsView from '../views/ContactUsView.vue'
 import AICustomerServiceView from '../views/AICustomerServiceView.vue'
 import CopyrightView from '../views/CopyrightView.vue'
 import AccessibilityView from '../views/AccessibilityView.vue'
@@ -43,6 +44,11 @@ const routes = [
     path: '/solutions',
     name: 'solutions',
     component: SolutionsView,
+  },
+  {
+    path: '/contact-us',
+    name: 'contact-us',
+    component: ContactUsView,
   },
   {
     path: '/ai-service',

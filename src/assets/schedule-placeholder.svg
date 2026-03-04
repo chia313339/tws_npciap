@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="768" viewBox="0 0 1024 768" role="img" aria-labelledby="title desc">
+  <title id="title">計畫時程表暫存圖</title>
+  <desc id="desc">灰底 1024x768 圖片，用於計畫時程頁面右側暫時展示。</desc>
+  <rect width="1024" height="768" fill="#d9d9df" />
+  <rect x="28" y="28" width="968" height="712" rx="20" ry="20" fill="#e8e8ee" stroke="#b9c0cf" stroke-width="3" />
+  <line x1="80" y1="140" x2="944" y2="140" stroke="#c3cad8" stroke-width="2" />
+  <line x1="80" y1="250" x2="944" y2="250" stroke="#c3cad8" stroke-width="2" />
+  <line x1="80" y1="360" x2="944" y2="360" stroke="#c3cad8" stroke-width="2" />
+  <line x1="80" y1="470" x2="944" y2="470" stroke="#c3cad8" stroke-width="2" />
+  <line x1="80" y1="580" x2="944" y2="580" stroke="#c3cad8" stroke-width="2" />
+  <text x="512" y="330" text-anchor="middle" font-family="'Noto Sans TC', sans-serif" font-size="50" font-weight="700" fill="#7f889b">計畫時程表</text>
+  <text x="512" y="392" text-anchor="middle" font-family="'Noto Sans TC', sans-serif" font-size="34" font-weight="600" fill="#98a0b2">1024 × 768 暫存圖</text>
+</svg>

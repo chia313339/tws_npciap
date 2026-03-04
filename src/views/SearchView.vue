@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import Fuse from 'fuse.js'
+import { solutionsSearchText } from '../data/solutionsData'
 
 const searchQuery = ref('')
 
@@ -9,7 +10,8 @@ const pageMetaMap = {
   ScheduleView: { title: '計畫時程', path: '/schedule' },
   FAQView: { title: 'FAQ', path: '/faq' },
   ApplyView: { title: '申請須知', path: '/apply' },
-  SolutionsView: { title: '解決方案', path: '/solutions' },
+  SolutionsView: { title: '方案分類與供應商', path: '/solutions' },
+  ContactUsView: { title: '聯絡我們', path: '/contact-us' },
   ContactFormView: { title: '聯繫表單', path: '/contact-form' },
   AICustomerServiceView: { title: 'AI客服', path: '/ai-service' },
   CopyrightView: { title: '版權聲明', path: '/copyright' },
@@ -50,11 +52,13 @@ const indexedPages = Object.entries(rawViewModules)
 
     const templateContent = extractTemplateContent(rawContent)
     const plainText = stripHtmlToText(templateContent)
+    const extraText = viewName === 'SolutionsView' ? solutionsSearchText : ''
+    const fullText = `${plainText} ${extraText}`.trim()
 
     return {
       ...meta,
-      content: plainText,
-      normalized: `${meta.title} ${plainText}`.toLowerCase(),
+      content: fullText,
+      normalized: `${meta.title} ${fullText}`.toLowerCase(),
     }
   })
   .filter(Boolean)
