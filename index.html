@@ -8,6 +8,59 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      window.WebchatConfig = {
+        platformId: "46411a19",
+        platformName: "經發局測試",
+        chatIconUrl:
+          "https://crossbotclientdata.s3.ap-northeast-1.amazonaws.com/0cf2d594-77a5-425f-865b-2f70be5cd96c/46411a19/Avatar.gif",
+        botIconUrl:
+          "https://crossbotclientdata.s3.ap-northeast-1.amazonaws.com/0cf2d594-77a5-425f-865b-2f70be5cd96c/46411a19/Avatar.gif",
+        defaultCorner: "右下角",
+      };
+    </script>
+    <script src="https://webchatcomponent.s3.ap-northeast-1.amazonaws.com/webchat-component.js"></script>
+    <style>
+      #chat-icon {
+        width: 68px !important;
+        height: 68px !important;
+        background-color: transparent !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      #chat-icon.corner-bottom-right {
+        top: auto !important;
+        left: auto !important;
+        right: 20px !important;
+        bottom: 20px !important;
+      }
+
+      @media (max-width: 768px), (pointer: coarse) and (orientation: landscape) and (max-width: 1024px) {
+        #chat-icon.corner-bottom-right {
+          right: 16px !important;
+          bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+
+        #chat-icon {
+          width: 56px !important;
+          height: 56px !important;
+        }
+
+        #chat-popup,
+        #chat-popup.scaled {
+          left: auto !important;
+          top: auto !important;
+          right: 16px !important;
+          bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+          width: calc(100vw - 32px) !important;
+          height: calc(100vh - 120px) !important;
+        }
+      }
+    </style>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
