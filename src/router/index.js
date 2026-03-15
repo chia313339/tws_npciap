@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import OpeningHomeView from '../views/OpeningHomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ScheduleView from '../views/ScheduleView.vue'
 import FAQView from '../views/FAQView.vue'
@@ -18,7 +19,8 @@ import MaintenanceView from '../views/MaintenanceView.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/about',
+    name: 'home',
+    component: OpeningHomeView,
   },
   {
     path: '/about',

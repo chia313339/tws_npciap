@@ -6,6 +6,7 @@ import { solutionsSearchText } from '../data/solutionsData'
 const searchQuery = ref('')
 
 const pageMetaMap = {
+  OpeningHomeView: { title: '首頁', path: '/' },
   AboutView: { title: '關於計畫', path: '/about' },
   ScheduleView: { title: '計畫時程', path: '/schedule' },
   FAQView: { title: 'FAQ', path: '/faq' },

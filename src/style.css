@@ -43,6 +43,15 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+body.pre-home-stage #chat-icon,
+body.pre-home-stage #chat-popup,
+body.pre-home-stage #chat-popup.scaled {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;
