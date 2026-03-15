@@ -207,7 +207,7 @@ onMounted(() => {
       <div class="content-panel">
         <header class="title-row">
           <span class="title-line"></span>
-          <h1>首頁</h1>
+          <h1></h1>
           <span class="title-line"></span>
         </header>
 
@@ -461,7 +461,7 @@ onMounted(() => {
   max-width: 100vw;
   max-height: 100dvh;
   object-fit: contain;
-  border-radius: clamp(0px, 1vw, 14px);
+  border-radius: 0;
   box-shadow: 0 20px 52px rgba(5, 9, 38, 0.42);
 }
 
