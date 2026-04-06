@@ -4,17 +4,20 @@ import OpeningHomeView from '../views/OpeningHomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ScheduleView from '../views/ScheduleView.vue'
 import FAQView from '../views/FAQView.vue'
-import ApplyView from '../views/ApplyView.vue'
-import SolutionsView from '../views/SolutionsView.vue'
 import ContactUsView from '../views/ContactUsView.vue'
-import AICustomerServiceView from '../views/AICustomerServiceView.vue'
-import CopyrightView from '../views/CopyrightView.vue'
-import AccessibilityView from '../views/AccessibilityView.vue'
-import PrivacyView from '../views/PrivacyView.vue'
-import ContactFormView from '../views/ContactFormView.vue'
 import SearchView from '../views/SearchView.vue'
-import NotFoundView from '../views/NotFoundView.vue'
-import MaintenanceView from '../views/MaintenanceView.vue'
+import CategoriesIndexView from '../views/categories/CategoriesIndexView.vue'
+import AIMarketInsightView from '../views/categories/AIMarketInsightView.vue'
+import AIEnterpriseOperationsView from '../views/categories/AIEnterpriseOperationsView.vue'
+import AIAssistantView from '../views/categories/AIAssistantView.vue'
+import AIVerticalIntegrationView from '../views/categories/AIVerticalIntegrationView.vue'
+import AIHomeCareView from '../views/categories/AIHomeCareView.vue'
+import AIContentCreationView from '../views/categories/AIContentCreationView.vue'
+import AIIntelligentCustomerServiceView from '../views/categories/AIIntelligentCustomerServiceView.vue'
+import AISmartManufacturingView from '../views/categories/AISmartManufacturingView.vue'
+import AIInformationSecurityView from '../views/categories/AIInformationSecurityView.vue'
+import AIOperationAutomationView from '../views/categories/AIOperationAutomationView.vue'
+import AIServiceSuppliersView from '../views/vendors/AIServiceSuppliersView.vue'
 
 const routes = [
   {
@@ -38,14 +41,64 @@ const routes = [
     component: FAQView,
   },
   {
-    path: '/apply',
-    name: 'apply',
-    component: ApplyView,
+    path: '/categories',
+    name: 'categories',
+    component: CategoriesIndexView,
   },
   {
-    path: '/solutions',
-    name: 'solutions',
-    component: SolutionsView,
+    path: '/categories/ai-market-insight',
+    name: 'category-ai-market-insight',
+    component: AIMarketInsightView,
+  },
+  {
+    path: '/categories/ai-enterprise-operations',
+    name: 'category-ai-enterprise-operations',
+    component: AIEnterpriseOperationsView,
+  },
+  {
+    path: '/categories/ai-assistant',
+    name: 'category-ai-assistant',
+    component: AIAssistantView,
+  },
+  {
+    path: '/categories/ai-vertical-integration',
+    name: 'category-ai-vertical-integration',
+    component: AIVerticalIntegrationView,
+  },
+  {
+    path: '/categories/ai-home-care',
+    name: 'category-ai-home-care',
+    component: AIHomeCareView,
+  },
+  {
+    path: '/categories/ai-content-creation',
+    name: 'category-ai-content-creation',
+    component: AIContentCreationView,
+  },
+  {
+    path: '/categories/ai-intelligent-customer-service',
+    name: 'category-ai-intelligent-customer-service',
+    component: AIIntelligentCustomerServiceView,
+  },
+  {
+    path: '/categories/ai-smart-manufacturing',
+    name: 'category-ai-smart-manufacturing',
+    component: AISmartManufacturingView,
+  },
+  {
+    path: '/categories/ai-information-security',
+    name: 'category-ai-information-security',
+    component: AIInformationSecurityView,
+  },
+  {
+    path: '/categories/ai-operation-automation',
+    name: 'category-ai-operation-automation',
+    component: AIOperationAutomationView,
+  },
+  {
+    path: '/vendors',
+    name: 'vendors',
+    component: AIServiceSuppliersView,
   },
   {
     path: '/contact-us',
@@ -53,48 +106,13 @@ const routes = [
     component: ContactUsView,
   },
   {
-    path: '/ai-service',
-    name: 'ai-service',
-    component: AICustomerServiceView,
-  },
-  {
-    path: '/copyright',
-    name: 'copyright',
-    component: CopyrightView,
-  },
-  {
-    path: '/accessibility',
-    name: 'accessibility',
-    component: AccessibilityView,
-  },
-  {
-    path: '/privacy',
-    name: 'privacy',
-    component: PrivacyView,
-  },
-  {
-    path: '/contact-form',
-    name: 'contact-form',
-    component: ContactFormView,
-  },
-  {
     path: '/search',
     name: 'search',
     component: SearchView,
   },
   {
-    path: '/404',
-    name: 'not-found',
-    component: NotFoundView,
-  },
-  {
-    path: '/maintenance',
-    name: 'maintenance',
-    component: MaintenanceView,
-  },
-  {
     path: '/:pathMatch(.*)*',
-    redirect: '/404',
+    redirect: '/',
   },
 ]
 
@@ -104,20 +122,6 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0, behavior: 'smooth' }
   },
-})
-
-const isMaintenanceMode = String(import.meta.env.VITE_MAINTENANCE_MODE || '').toLowerCase() === 'true'
-
-router.beforeEach((to) => {
-  if (to.path === '/maintenance') {
-    return true
-  }
-
-  if (isMaintenanceMode) {
-    return '/maintenance'
-  }
-
-  return true
 })
 
 export default router

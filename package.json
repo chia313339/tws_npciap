@@ -6,13 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync-metadata": "node scripts/sync-metadata.mjs",
+    "predev": "npm run sync-metadata && npm run prepare-vendors",
+    "prebuild": "npm run sync-metadata && npm run prepare-vendors",
+    "prepare-vendors": "node scripts/prepare-vendors.mjs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "fuse.js": "^7.1.0",
     "sweetalert2": "^11.26.21",
     "vue": "^3.5.24",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",

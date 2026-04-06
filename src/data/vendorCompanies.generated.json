@@ -1,0 +1,463 @@
+[
+  {
+    "companyShortName": "大數軟體",
+    "companyName": "大數軟體有限公司",
+    "companyIntro": "大數軟體有限公司（LargitData.com）是台灣領先的企業情資 AI 公司，專注以 AI 整合外部威脅情報與內部知識，協助政府機關與企業做出更快、更精準的決策。公司自研產品包括 InfoMiner 即時輿情分析平台，可即時監測新聞、社群與公開資訊，掌握市場情資與潛在威脅；以及 RAGi 企業 AI 檢索增強生成引擎，支援地端部署，以大型語言模型串聯內部知識庫，快速產製研究與分析報告，將內部情資轉化為決策優勢。此外，公司亦架設線上教育平台「大數學堂」，以培養台灣大數據人才為宗旨，提供免費線上教育資源，讓更多人能接觸數據分析與大數據技術。",
+    "websiteUrl": "https://largitdata.com/",
+    "solutionNames": [
+      "InfoMiner 即時輿情分析平台",
+      "RAGi 企業 AI 決策平台",
+      "AIMochi（語音轉文字／會議逐字稿與字幕）"
+    ],
+    "logoFileName": "大數軟體.png"
+  },
+  {
+    "companyShortName": "用益網路科技",
+    "companyName": "用益網路科技股份有限公司",
+    "companyIntro": "metabiz自成立以來，始終專注於【智慧科技 / 會員系統】領域，致力為客戶提供最具價值的創新解決方案。我們秉持「務實應用、互利共益」的核心理念，將深厚的技術底蘊與市場需求完美結合，打造出優質的牌會員管理系統。\n\n憑藉著專業的團隊與敏銳的市場洞察，metabiz不僅能快速回應產業變化，更以【客製化服務 / 高效能技術】作為核心優勢，成功協助眾多企業突破【數位轉型 / 營運效能】的瓶頸，贏得了廣大客戶的高度信賴與口碑。\n\n展望未來，metabiz將持續精進技術與服務品質，積極拓展【新市場或新技術】。我們期盼成為業界最具影響力的創新夥伴，用最實際的行動為客戶創造最大效益，攜手共創永續發展的美好未來。",
+    "websiteUrl": "https://metabiz.tw/",
+    "solutionNames": [
+      "metabiz 企業 AI Agent 智腦方案"
+    ],
+    "logoFileName": "用益網路科技.png"
+  },
+  {
+    "companyShortName": "團薦科技",
+    "companyName": "團薦科技股份有限公司",
+    "companyIntro": "團薦科技成立於2023年，以AI技術打造智慧零售解決方案，專注於精準選址與門市營運分析。我們相信，選址不是終點，而是實體門市成功的起點；真正的價值，在於從展店決策到長期經營的全流程數據驅動管理。\n「探點 TanDian Pro」整合商圈數據、人口結構與消費預測模型，協助零售品牌快速找到最佳地點、降低展店風險並提升營收表現。同時，進一步提供營運優化與門市體質分析，協助品牌打造可長可久的經營模式。\n團薦不只是 SaaS（Software as a Service），更是 SaaS（Solution as a Service），以數據與洞察陪伴品牌實現永續成長。",
+    "websiteUrl": "https://home.tangent-plus.com",
+    "solutionNames": [
+      "「探點TanDian Pro－AI智能選址平台」賦能新北方案"
+    ],
+    "logoFileName": "團薦科技.png"
+  },
+  {
+    "companyShortName": "麟數據科技",
+    "companyName": "麟數據科技股份有限公司",
+    "companyIntro": "本公司成立於2016年，專注於AI數據科技（AI Data Technology），致力於透過先進數據技術與人工智慧，協助企業提升數據應用能力與決策效率。公司打造多元創新的SaaS平台，核心能力涵蓋數據蒐集、清洗、治理至應用的完整流程，協助企業將數據轉化為可行的商業洞察。\n\n透過數據整合與AI分析能力，我們協助品牌建立以數據為核心的營運模式，並打造自有數據產品與解決方案（如 Insighta360°），應用於CRM、精準行銷、廣告投放與消費者行為分析等場景，幫助企業即時掌握市場動態並提升決策效率。\n\n目前服務產業橫跨零售、電商、食品、汽車、金融等領域，協助企業深化顧客理解、優化行銷策略，並以更高效率與更低成本創造商業價值。\n\n長期目標為打造企業級數據中台與AI應用生態，促進數據資產化與跨場域應用。",
+    "websiteUrl": "https://www.lndata.com",
+    "solutionNames": [
+      "Insighta{360°}"
+    ],
+    "logoFileName": "麟數據科技.png"
+  },
+  {
+    "companyShortName": "元盛生醫電子",
+    "companyName": "元盛生醫電子股份有限公司",
+    "companyIntro": "全球第一個 AI 合規平台，採用NVIDIA BioNeMo技術，從原料到報告、從法規風險到數位追蹤，一次完成，全程精準高效!我們致力於為美妝產業提供前沿的人工智能解決方案，以重新定義保養品的數位使用體驗。我們團隊擁有專業的AI專家和技術專家，致力於整合創新科技，將科學、安全和效率完美結合，dermaGPT提供安全透明的成分資訊與配方功效的驗證。我們以AI驅動的化妝品安全評估系統（CPSR）利用強大的算法和累積全球千萬筆的資料庫，迅速、準確地評估化妝品成分的安全性。我們的目標是通過技術創新，幫助企業確保其產品遵守最嚴格的法規要求，同時提升消費者對產品功效與安全的信心。",
+    "websiteUrl": "https://dermagpt.com/hant/home/",
+    "solutionNames": [
+      "AI PIF生成與Agent管理系統"
+    ],
+    "logoFileName": "元盛生醫電子.png"
+  },
+  {
+    "companyShortName": "台聚管理顧問",
+    "companyName": "台聚管理顧問股份有限公司",
+    "companyIntro": "台聚集團為因應多元化經營及未來組織發展需要，於九十年三月十六日成立台聚管理顧問公司，統籌提供集團各關係企業之人資、員工事務、財務、會計、資訊、採購、關務、授信、稽核、 法務與股務等共同性事務之資源整合與規劃管理服務，俾使各公司更能專注在產品經營與開發，提升營運整體綜效。",
+    "websiteUrl": "",
+    "solutionNames": [
+      "IVA/PPE 智能影像分析系統"
+    ],
+    "logoFileName": "台聚管理顧問.png"
+  },
+  {
+    "companyShortName": "有創科技",
+    "companyName": "有創科技股份有限公司",
+    "companyIntro": "有創公司具備大型導覽、藍芽定位、ERP等平台設計能力，且獲得數發部人工智慧行業應用能力登錄證書。並且承接許多政府單位、民間企業等開發專案，具備豐富系統開發經驗。",
+    "websiteUrl": "",
+    "solutionNames": [
+      "空品平台系統"
+    ],
+    "logoFileName": "有創科技.png"
+  },
+  {
+    "companyShortName": "背景模式",
+    "companyName": "背景模式股份有限公司",
+    "companyIntro": "在數位轉型的浪潮中，我們致力於成為企業最可靠的數位轉型推手。我們協助各產業開發量身設計的數位化工具，將複雜的流程化繁為簡，實質提升企業及產業效率升級。\n而我們更在「企業健康職場」領域深耕多年。憑藉著與中部專業臨場服務單位長達一年以上的共同研發，我們針對臨場服務開發出專屬的數位化平台，大幅增強企業對員工健康照護的關懷深度。目前，這套系統已成功導入上市公司與中部指標型醫療院所，透過精準的數據管理，讓健康服務更具感溫與效率。",
+    "websiteUrl": "https://bgmotion.com.tw/",
+    "solutionNames": [
+      "APIS 臨場服務員工健康管理系統＿新北優惠方案"
+    ],
+    "logoFileName": "背景模式.png"
+  },
+  {
+    "companyShortName": "滿拓科技",
+    "companyName": "滿拓科技股份有限公司",
+    "companyIntro": "滿拓科技致力於提供領先市場的「落地式 GenAI」一站式服務。憑藉獨家RAG技術與具備任務執行能力的 AI Agent，並結合高度自動化的 LLM 訓練流程，我們協助企業在確保資料隱私的前提下，快速建構專屬領域AI應用，實現從「資訊檢索」到「自主協作」的AI數位轉型。\n\n\n核心產品：\n•Document Expert：企業級AI文件智能檢索問答平台。結合 RAG 與 AI Agent 技術，除精準檢索內部資料外，更具備自主查詢外部資訊與自動化報告協作能力，能夠串接多方資訊並產出成果，直擊企業辦公痛點。\n•FinetuneX：專為模型精煉設計的工具。透過Data Expert進行高品質數據擴增與精煉，並結合Finetune Expert平台，協助企業打造最貼合業務情境的專屬AI模型。",
+    "websiteUrl": "https://www.deepmentor.ai/",
+    "solutionNames": [
+      "Document Expert (企業級AI文件智能檢索問答平台)"
+    ],
+    "logoFileName": "滿拓科技.png"
+  },
+  {
+    "companyShortName": "睿思創新",
+    "companyName": "睿思創新股份有限公司",
+    "companyIntro": "REAS 成立於 2022 年，致力於成為亞洲領先的 AIaaS (AI as a Service) 服務供應商。我們專注於「AI 勞動力」解決方案的研發，透過獨創的混合式 AI 運算架構 (Hybrid AI Architecture) 與 軟硬整合技術，協助企業將生成式 AI 從「雲端對話」真正落地為「生產力工具」。",
+    "websiteUrl": "https://www.reas.com.tw/",
+    "solutionNames": [
+      "CROSSBOT AI Agent Platform Basic 基礎版 (入門)",
+      "CROSSBOT AI Agent Platform – Pro 專業版",
+      "CROSSBOT AI Agent Platform – Enterprise 企業旗艦版"
+    ],
+    "logoFileName": "睿思創新.png"
+  },
+  {
+    "companyShortName": "網際智慧",
+    "companyName": "網際智慧股份有限公司",
+    "companyIntro": "網際智慧（IQT.AI）致力於建構「可信任、有溫度」的 AI Agent 體系，橫跨文字輸入、聲音表達、影音創作與法遵合規四大領域。我們屢獲金鼎獎、經濟部智慧創新大賞 Best AI Awards、台灣人工智慧協會 AI Award Best Solutions、數位發展部數位產業署－AI應用鬥智賽、AI TAIWAN 創新商務獎等頂尖殊榮。旗下主力包含：①長期穩居市佔領先的－text.tw 自然輸入法、②賦予 AI 擬真人聲的－VoAI.AI 絕好聲創，③確保企業治理與合規的－XComply.AI快合規。網際智慧不只是技術專家，更是企業數位轉型最值得信賴的 AI 夥伴！",
+    "websiteUrl": "www.iqt.ai",
+    "solutionNames": [
+      "快合規 – AI廣告違規風險檢核與修正建議服務平台 (https://xcomply.ai)",
+      "絕好聲創VoAI聲音創造所 - 超擬真AI語音與短影音生成服務 (https://voai.ai)"
+    ],
+    "logoFileName": "網際智慧.png"
+  },
+  {
+    "companyShortName": "聚典資訊",
+    "companyName": "聚典資訊股份有限公司",
+    "companyIntro": "聚典資訊是數據價值的重述者。創立於 2019 年 3 月，由頂尖工程與專業經理人組成。深受超過300家客戶信賴，榮獲20多項獎項肯定。並擁有 ISO27001 資訊安全管理認證，以及數位發展部之 AI 技術服務能量登錄官方認證。\n我們整合AI、AIoT與系統開發，為製造業與零售業提供智慧解決方案，包含智能生產線、ESG轉型、AI分群行銷、智能客服，以及客製化方案。導入聚典的AI解決方案，您的企業將在資料科學的支持下持續增長。",
+    "websiteUrl": "https://retailingdata.com.tw/",
+    "solutionNames": [
+      "聚典資訊ｘ新北企業限定優惠：AI智慧轉型零門檻啟動方案"
+    ],
+    "logoFileName": "聚典資訊.png"
+  },
+  {
+    "companyShortName": "臺灣通用紡織科技",
+    "companyName": "臺灣通用紡織科技股份有限公司",
+    "companyIntro": "Frontier 以 TextileCloud 為核心產品，提供一站式數位布料管理解決方案，整合 2D / 3D 布料影像、規格資訊與永續數據。平台涵蓋數位資產管理（DAM）、數位產品建置（DPC）流程與永續數據模組，協助企業集中管理布料資料、快速生成具物理參數與 AI 擬真效果的 3D Material，並可對接主流 3D 設計軟體。同時內建 LCA 架構，提供碳排與水耗等環境指標，支援 DPP 與 ESG 需求。相較傳統流程，無需額外硬體投資，可降低樣品寄送成本、縮短開發時程，強化品牌與供應鏈間的即時協作效率。",
+    "websiteUrl": "https://www.frontier.cool/",
+    "solutionNames": [
+      "TextileCloud™ - AI 驅動的企業級材料管理解決方案-Annual Package -Basic"
+    ],
+    "logoFileName": "臺灣通用紡織科技.png"
+  },
+  {
+    "companyShortName": "慧穩科技",
+    "companyName": "慧穩科技股份有限公司",
+    "companyIntro": "慧穩科技成立於 2016 年，為專注於 AI 落地應用的解決方案提供者，協助客戶建立AI「正循環」，提供客戶AI Agent、大模型(LLM、VLM)、電腦視覺、數據分析 (AutoML)、專家系統等融合式AI 解決方案(WinHub.AI – Fusion AI Solutions)，使客戶可以藉由一站式快速完成AI落地的開發與部屬，目前已針對半導體、智慧水務等領域完善軟硬體整合，可達開箱即落地，合作夥伴有軟體整合商、系統整合商、自動化整合商、AOI設備商等。",
+    "websiteUrl": "https://aiwin.com.tw/",
+    "solutionNames": [
+      "WinChat－各產業應用的大語言模型應用平台",
+      "AIWInOps—各產業應用的影像型AI訓練平台",
+      "NumOps－各產業應用的數據型AI訓練平台",
+      "WinEdge－各產業應用的AI邊緣運算推論系統"
+    ],
+    "logoFileName": "慧穩科技.png"
+  },
+  {
+    "companyShortName": "曜夆科技",
+    "companyName": "曜夆科技股份有限公司",
+    "companyIntro": "直接驅動營收成長與營運效率提升。月租 5,000 元起，免高額建置費，最快數日導入、模組架構、彈性擴充。由 CGSI（中華寰宇整合）提供整合規劃、客製開發與企業級部署，確保穩定上線與長期營運，轉化企業既有圖文資料為「可成交、可預測、可優化」的 AI 生產力系統：\n．AI 商機成交助理：整合官網、LINE、電子表單訊息，LLM判讀客戶意圖與成交潛力分級，提供預期方案建議並可生成業務人員跟進摘要，打造24 小時接單機制\n．AI CRM／ERP／MES：訂單自動轉工單，串聯庫存與產能，提供交期預估與異常預警，並整合銷售與產線數據，實現跨部門資訊整合；具備近零硬體建置成本、無須額外學習曲線與AI數據分析能力\n\n立即行動：留下您的需求，享免費 AI 導入諮詢，快速導入最適解決方案。",
+    "websiteUrl": "www.ch-si.com",
+    "solutionNames": [
+      "AI對話型服務整合方案(產品名稱：DocInsight AI)"
+    ],
+    "logoFileName": "曜夆科技.png"
+  },
+  {
+    "companyShortName": "璽樂科技",
+    "companyName": "璽樂科技股份有限公司",
+    "companyIntro": "璽樂科技專注營建與公共工程場域，提供結合 AI 影像、IoT 感測與雲端管理的一站式智慧工安平台。系統涵蓋人員出入、危險區域管制、環境監測、異常警示與影像留存等功能，以模組化設計對應不同規模工地，並支援多工地雲端監控與權限管理，讓總公司可即時掌握各工地風險與狀態，同時自動產出符合金安獎、金質獎與勞檢需求的報表，降低人工整理成本。",
+    "websiteUrl": "https://idaka.io/",
+    "solutionNames": [
+      "AI影片生成與教育訓練",
+      "AI影像缺失辨識與報告自動化方案"
+    ],
+    "logoFileName": "璽樂科技.png"
+  },
+  {
+    "companyShortName": "易晨智能",
+    "companyName": "易晨智能股份有限公司",
+    "companyIntro": "易晨智能將語音辨識、自然語言分析，應用於應用在智慧教育以及智慧醫療做跨領域結合，運用機器學習、深度學習、資料探勘演算法，讓用戶有所感受。重點發展的是語音辨識以及自然語言文字分析處理以及數據分析，今年我們重點發展的項目是AI教育以及AI 醫護交班逐字稿紀錄。AI教育解決中英文口說問題，用AI進行評分及對話；AI 逐字稿交班紀錄解決醫護人員人力不足以及可即時性逐字記錄並進行摘要分類。",
+    "websiteUrl": "ez-ai.com.tw",
+    "solutionNames": [
+      "語音辨識語言學習及逐字稿"
+    ],
+    "logoFileName": "易晨智能.png"
+  },
+  {
+    "companyShortName": "創造智能科技",
+    "companyName": "創造智能科技股份有限公司",
+    "companyIntro": "創造智能科技是一家AI Martech新創公司，專注於 AI行銷科技、LINE CRM、AI客服機器人與 AI虛擬人應用，致力於協助企業將「流量」真正轉化為「可經營的會員與數據資產」。\n結合影音內容、行銷科技與AI應用實戰經驗，打造可快速導入、可規模化、可量化成效的AI解決方案，客戶涵蓋政府單位、大型企業、品牌客戶與文化觀光場域。\n主要商品/服務項目：\n•\tLINE CRM × AI客服：協助企業建構可分析語意、貼標分眾、導流轉換的LINE官方帳營運系統。\n•\tAI虛擬人與互動導覽：應用於官網、line、FB message、活動、展覽、品牌互動與智慧導覽場域。\n•\tAIGC影音與廣告製作：加速影音內容產製，降低成本、提升產量與品質。\n•\tAI落地應用顧問服務：從場景設計、互動策略到實際成效落地。",
+    "websiteUrl": "https://www.aicreate360.com/",
+    "solutionNames": [
+      "AI Sales 智能銷售助手",
+      "AiTAGO Line CRM"
+    ],
+    "logoFileName": "創造智能科技.png"
+  },
+  {
+    "companyShortName": "緯謙科技",
+    "companyName": "緯謙科技股份有限公司",
+    "companyIntro": "緯謙科技 (WiAdvance) 為緯創集團旗下子公司，作為創新的雲端服務供應商，提供以Cloud、AI、Data為核心的一站式服務，，擁有強大的雲端技術團隊與豐富的場域落地經驗，深耕智慧製造、智慧醫療、智慧城市、智慧農業/零售等垂直產業應用，專注以雲端科技為企業打造數位轉型的強韌實力。",
+    "websiteUrl": "www.wiadvance.com",
+    "solutionNames": [
+      "WiKMS 企業知識管理助手"
+    ],
+    "logoFileName": "緯謙科技.png"
+  },
+  {
+    "companyShortName": "環球睿視",
+    "companyName": "環球睿視股份有限公司",
+    "companyIntro": "環球睿視 (Ubestream) 成立於 2016 年，是專注於語音人工智慧與智慧語音技術的深科技 (Deep-tech) 領導廠商，亦是首家掛牌創櫃板的 AI 創新企業 (TPEx 7587)。我們的核心優勢在於自主研發的全棧式 AI 語意語音演算法，深度整合語音識別 (STT)、語音生成 (TTS)、自然語言理解 (NLU) 與文本分析 (NLP)。憑藉卓越的技術架構，我們能將 AI 模型部署於雲端、邊緣端 (Edge)及嵌入式晶片，在無需網路連接的環境下，實現安全、低延遲且具備強大數據隱私保護的即時人機互動。旗下旗艦產品「AIspeakin 同步口譯代理人」運用串流式全雙工 (Streaming Duplex) 與 GenAI 技術，具備上下文自動校正與語種自動辨識功能，達成高準確、秒速級的雙向翻譯。已成功進駐台灣四大國際機場，提供國門級的多語服務，並廣泛應用於影音轉寫、會議紀錄及同步口譯等場域。目前已將事業版圖擴張至美國、日本、新加坡等全球市場，持續為智慧城市、交通、金融、旅遊與公共服務領域提供具高度擴展性的語音 AI 解決方案，實現 24 小時免接觸、高效率的人機協作未來",
+    "websiteUrl": "https://ubestream.com/",
+    "solutionNames": [
+      "AIspeakin – AI即時/非即時語音辨識/翻譯/語譯服務"
+    ],
+    "logoFileName": "環球睿視.png"
+  },
+  {
+    "companyShortName": "凌松科技",
+    "companyName": "凌松科技有限公司",
+    "companyIntro": "凌松科技專注於健康科技整合，結合資訊、運動科學、公共衛生與人工智慧，打造 AI Coach智慧健康生態系。平台整合銀髮族、運動、營養、認知、感官與生活數據，應用於高齡城市、智慧住宅及健康促進服務。多年來協助政府、企業、學校與社區建構智慧健康照護系統，並屢獲國內獎項及聯合國教科文組織（UNESCO）專案肯定。\n團隊擁有多項台灣與國際專利，技術涵蓋AIoT感測、生醫系統、穿戴裝置、運動訓練 及生成式AI互動平台。核心產品AI Coach平台採用多模態人工智慧（Multimodal AI），整合文字、圖像、語音、影片與感測數據，模擬人類教練的感知與判斷，提供即時、個人化、高互動性的訓練與健康引導，並協助高齡與衰弱族群進行失能預防、健康促進及預測分析。\n以「技術驅動人機協作」為願景，結合具身智慧（Embodied AI），推動SDGs與 ESG永續發展，引領多模態AI跨入人機互動新世代，成為智慧健康產業的創新推手。",
+    "websiteUrl": "https://www.synergy.tw/",
+    "solutionNames": [
+      "AI Coach 功能性體適能評估"
+    ],
+    "logoFileName": "凌松科技.png"
+  },
+  {
+    "companyShortName": "健康盟",
+    "companyName": "健康盟股份有限公司",
+    "companyIntro": "健康盟公司致力於打造結合數位科技與醫療專業的整合型健康服務平台，專注於牙科與基層醫療數位轉型解決方案。我們以「數位賦能、專業升級、品牌成長」為核心理念，開發DigiMEd數位醫療系統，整合患者管理、數位衛教、療程說明與數位手術同意書簽署流程，協助診所提升溝通效率與醫病信任，同時強化內部管理與營運績效。\n\n目前健康盟已與全台超過700間牙醫診所合作，累積豐富實務經驗與成功案例，成為牙科數位轉型的重要推手。我們透過影音內容製作、數位行銷策略與專業教育訓練，協助醫療院所建立專業品牌形象，優化患者體驗並提升療程轉化率。\n\n健康盟相信，醫療不只是治療，更是溝通與信任的建立。未來將持續深化智慧醫療應用，推動數位醫療標準化，成為診所數位轉型與品牌升級最值得信賴的長期合作夥伴。",
+    "websiteUrl": "https://www.healthleaguex.com/",
+    "solutionNames": [
+      "健康盟：重塑牙科營運的智慧引擎"
+    ],
+    "logoFileName": "健康盟.png"
+  },
+  {
+    "companyShortName": "開源智造",
+    "companyName": "開源智造股份有限公司",
+    "companyIntro": "開源智造（OpenAIFab）深耕 AI 醫療與智能照護，創辦人因親自照顧家屬的切身經歷，深刻體會鼻胃管灌食的風險與壓力，進而自主研發「佳灌安 FeedSafe」。我們致力將尖端 AI 技術落地，提供全方位居家醫療物聯網解決方案。\n佳灌安 FeedSafe 聚焦「鼻胃管灌食安全」，回應流程繁瑣易被省略、人力不足無法全面覆蓋的雙重痛點。結合自主研發的 AI 聲紋辨識與藍牙數位聽診器，將繁瑣的確認流程轉為直覺的安全機制，大幅降低非專業者的操作門檻，減輕家庭照顧負擔。\n我們期盼賦能居護所、長照機構與醫療院所，無縫銜接居家照護，成為守護醫病與家庭最堅實的科技後盾，兼具產業效益與社會公益價值。",
+    "websiteUrl": "https://www.facebook.com/openaifab/?locale=zh_TW",
+    "solutionNames": [
+      "居家營養照護AI工具導入- 佳灌安"
+    ],
+    "logoFileName": "開源智造.png"
+  },
+  {
+    "companyShortName": "艾利思科技",
+    "companyName": "艾利思科技股份有限公司",
+    "companyIntro": "艾利思科技成立於 2018 年，由專業的全端工程師團隊組成，致力於以「化繁為簡，驅動企業未來」為核心理念，協助企業有效落實數位轉型。公司從企業客製化軟體服務出發，累積豐富跨產業實戰經驗，服務客戶超過 150 家，涵蓋金融、製造、零售、能源及政府公共工程等領域。\n\n艾利思科技近年專注於各類型場域管理，並推出Aura智慧感知系統，除了知名的精準定位系統與多元的環境感測器解決方案外，更可結合影像 AI 與環境數據分析，提供即時、可解釋且可落地的場域智慧管理能力，協助企業預防風險、保障人員安全與關鍵資產，成為企業長期信賴的端到端數位轉型夥伴。",
+    "websiteUrl": "https://www.ellis.tw",
+    "solutionNames": [
+      "Aura 智慧影像及場域感知管理系統"
+    ],
+    "logoFileName": "艾利思科技.png"
+  },
+  {
+    "companyShortName": "城智科技",
+    "companyName": "城智科技股份有限公司",
+    "companyIntro": "AIRA城智科技是由逾20年AI影像處理經驗的團隊所組成，專注於AI領域的研究與開發。AIRA的使命是採用先進的人臉、人形與物件辨識技術，並整合於影像管理系統，開發AI+IOT+Cloud等多種整合性應用方案。\n於2020年榮獲 Intel Gold Partner 的殊榮，並與NVIDIA, Network Optix, AWS展開深度技術合作。解決方案廣泛應用於企業、智慧建築、工廠、工地管理與零售等場域，優化場域安全與管理效率。",
+    "websiteUrl": "https://www.aira.com.tw/",
+    "solutionNames": [
+      "airaTrack-全場域人臉追蹤解決方案"
+    ],
+    "logoFileName": "城智科技.png"
+  },
+  {
+    "companyShortName": "訊連科技",
+    "companyName": "訊連科技股份有限公司",
+    "companyIntro": "訊連科技（5203.TW）創立於 1996 年，為全球首屈一指的多媒體影音軟體及數位創意編輯軟體服務及 AI 臉部辨識、人型辨識技術開發商。訊連科技的產品及服務涵蓋數位影片及圖像內容創作、多媒體影音播放、視訊會議及直播與遠距教學、手機行動應用程式、AI 人臉辨識等多樣化解決方案，滿足消費性、商務、教育等跨領域多媒體應用。旗下威力導演、相片大師、PowerDVD 等電腦軟體和行動 App，透過零售、訂閱式服務及預載等方式，提供個人電腦品牌多樣化應用軟體。 \n\n訊連科技深耕 AI 人工智慧於創意內容影片圖像編輯，臉部辨識及人型辨識，透過深度學習法開發 FaceMe® AI 臉部辨識引擎，提供智慧安控、智慧差勤、智慧金融、智慧零售等垂直市場應用，卓越的辨識準確度，屢次於全球知名 NIST 人臉辨識測試獲得名列前茅佳績。",
+    "websiteUrl": "https://tw.cyberlink.com/faceme",
+    "solutionNames": [
+      "FaceMe Security 安控門禁解決方案"
+    ],
+    "logoFileName": "訊連科技.png"
+  },
+  {
+    "companyShortName": "雲義科技",
+    "companyName": "雲義科技股份有限公司",
+    "companyIntro": "Unipattern 雲義科技成立於2001年，公司創立以軟體研發為主，發展Data Mining演算法的核心技術，投入智慧型應用軟體產業。\nUnipicket 視衛通是雲義科技整合影像辨識模型及演算法的AI影像辨識即時通報系統，使用市場通用的RTSP協定影像串流辨識監視器畫面內的多種異常事件並即時通報，如此可在事件發生即時或初期就辨識通報，縮短通報時間並降低災害擴大，整合通報介面可整合其他IOT感測與VMS/CMS系統，提高整體場域安全。\nUnipicket視衛通可加強場域安全，已有不同公民營單位採用，為共同供應契約產品，參與總統盃黑克松競賽於2022年取得卓越團隊及2025年AI應用公共服務特別獎。",
+    "websiteUrl": "https://www.unipattern.com/",
+    "solutionNames": [
+      "Unipicket AI安防"
+    ],
+    "logoFileName": "雲義科技.png"
+  },
+  {
+    "companyShortName": "漫話科技",
+    "companyName": "漫話科技股份有限公司",
+    "companyIntro": "本方案為「兒少互動敘事與情緒學習AI服務平台」，專為教育與學習服務型企業設計，協助快速導入結合遊戲化互動、動畫式敘事與情緒紀錄之AI服務能力，減少教師、治療師於課前備課與課後進行情緒觀察整理與家長說明所需投入的時間，包括補教、幼教、安親、早療、特教等兒童教育服務或早療相關業者用於團課或客戶（家長）加值服務。系統包含管理後台、帳號權限、使用紀錄與成效摘要，支援企業快速導入、擴點與後續營運，並提供導入說明與技術支援，協助企業完成AI化升級。",
+    "websiteUrl": "https://www.mangachat.com",
+    "solutionNames": [
+      "兒少互動敘事與情緒學習AI服務平台"
+    ],
+    "logoFileName": "漫話科技.png"
+  },
+  {
+    "companyShortName": "亞博福爾摩沙",
+    "companyName": "亞博福爾摩沙有限公司",
+    "companyIntro": "亞博福爾摩沙打造全通路對話式AI客服系統，結合A.I.Voicebot\n(電話語音機器人)、A.I.Ambassador(智能服務大使)、A.I. Agent、A.I.Chatbot(聊天機器人)，覆蓋語音、文字與實體互動，提供無縫且即時的智慧客服體驗。具備超過20種語言、多語夾雜辨識)、多口音辨識，可支援跨文化、跨區域應用。具備多輪對話、記憶用戶偏好、意圖辨識等進階能力，提升服務效率與使用者滿意度。平台亦可彈性整合企業內部系統，進行數據蒐集與分析，實現智慧化的客服轉型。",
+    "websiteUrl": "https://www.asiabots.com.tw/",
+    "solutionNames": [
+      "A.I. Chatbot(聊天機器人）",
+      "A.I. Voicebot(聊天機器人）"
+    ],
+    "logoFileName": "亞博福爾摩沙.png"
+  },
+  {
+    "companyShortName": "社群洞察",
+    "companyName": "社群洞察股份有限公司",
+    "companyIntro": "社群洞察股份有限公司秉持「Work Smarter with GPT」理念，致力以生成式AI協助企業與政府解決知識傳遞、任務處理與品牌經營中的效率與溝通痛點。我們提供成熟的AI Agent解決方案，協助組織建立專屬任務助手，實現低門檻導入、無痛轉型與智慧化升級。旗下無程式碼平台 WebGUID.ai，讓企業以最低成本將AI整合至官網與社群渠道，即使非技術人員亦可快速建置AI應用，優化服務流程、提升互動體驗，同時大幅降低營運與客服負擔。透過AI協作機制，我們協助組織將知識轉化為可持續運作的智慧服務能力，真正落實以AI驅動成長與創新。",
+    "websiteUrl": "https://webguid.ai/",
+    "solutionNames": [
+      "WebGUID網路指南針"
+    ],
+    "logoFileName": "社群洞察.png"
+  },
+  {
+    "companyShortName": "凌典科技",
+    "companyName": "凌典科技有限公司",
+    "companyIntro": "凌典科技有限公司，104年成立，資本額500萬。\n 本公司致力於營運雲端預約系統服務、自動化工具推廣、第三方金流代辦、數位銷售知識教學。具備多重角色身份。\n(1) 雲端系統服務商：本公司Saas系統「TinyBook開店系統」至今已服務超過400位品牌客戶，協助其將營運流程線上自動化，包括相聲瓦舍、雲門舞集、台塑生醫、BenQ虹韻助聽器等知名業者。\n(2) 第三方金流經銷商：為Line Pay、街口支付、藍新金流、TapPay、PChome支付連等5間第三方金流公司授權經銷商。以及藍新電子發票經銷商。\n(3) 政府數位轉型專案 系統服務商&顧問：\n114年 經濟部 產業AI導入應用輔導 系統服務商\n114年 經濟部 推廣服務業上雲補助 系統服務商\n114年 台北市「店家數位基礎導入計畫」 系統服務商\n114年 台北市 台北數位企業發展中心 數位轉型顧問",
+    "websiteUrl": "https://tinybot.cc/",
+    "solutionNames": [
+      "AI全通路社群客服&預約系統"
+    ],
+    "logoFileName": "凌典科技.png"
+  },
+  {
+    "companyShortName": "穎諾科技",
+    "companyName": "穎諾科技股份有限公司",
+    "companyIntro": "穎諾科技核心產品為 OpsCentral 雲端全通路客服系統，協助企業整合電話、LINE、Facebook、官網與即時通訊等多元管道，集中管理顧客互動紀錄與服務流程，打造一致且高效率的客戶體驗。\n\n公司以雲端聯絡中心架構為基礎，結合生成式 AI 與自然語言處理技術，協助企業建置智慧客服與自動化回覆機制，提升回應速度與服務品質，同時降低人力成本與管理負擔。\n\n系統支援企業級權限與資安機制，並部署於國內雲端機房，導入門檻低且具高度擴充彈性，特別適合中小企業穩健推動客服數位化與營運升級，強化整體競爭力。",
+    "websiteUrl": "https://www.innovax.systems/tw/",
+    "solutionNames": [
+      "OpsCentral｜企業級 GenAI 全通路聯絡中心 SaaS 方案"
+    ],
+    "logoFileName": "穎諾科技.png"
+  },
+  {
+    "companyShortName": "傑騰智能",
+    "companyName": "傑騰智能股份有限公司",
+    "companyIntro": "傑騰智能（TAO Info）專注於大數據分析與人工智慧技術，深耕製造業資料分析領域，協助企業構建智慧化生態系統。公司通過自主研發的AI演算法與關鍵分析模組，優化商業決策、強化競爭優勢。自成立以來，多次獲政府與國際企業認可。近期聚焦解決製造、電子與建築工程領域中 SVG 設計圖高度仰賴人工解析所造成的效率與成本問題，運用 AI 進行 SVG 圖形結構解析與語義理解，將向量圖形、圖層、標註與元件資訊自動轉換為製造與工程系統可用的指令與資料格式。透過建立通用解析框架，可加速設計到生產流程，降低人工作業負擔，並將專業經驗內化為可重複使用的數位能力，協助產業提升自動化程度、良率與整體競爭力。",
+    "websiteUrl": "",
+    "solutionNames": [
+      "企業專業文件查詢知識管理及專業圖形AI解析"
+    ],
+    "logoFileName": "傑騰智能.png"
+  },
+  {
+    "companyShortName": "摩絡人工智慧",
+    "companyName": "摩絡人工智慧股份有限公司",
+    "companyIntro": "Morale AI 建構專為智慧製造打造的領域專屬 AI Agent 平台，提供可擴展、可解釋且可落地的決策支援能力。Morale AI platform以領域專用 LLM 結合機器學習與資料科學，串接 MES/ERP/設備與品質資料，打造可稽核、可解釋的 Agent 工作流；提供異常預警、良率分析、製程最佳化與節能減廢決策支援，支援 On-prem / Cloud / Hybrid 快速部署。",
+    "websiteUrl": "https://moraleai.com/",
+    "solutionNames": [
+      "Morale AI Agentic Platform 領域專用大型語言模型"
+    ],
+    "logoFileName": "摩絡人工智慧.png"
+  },
+  {
+    "companyShortName": "艾比互動娛樂",
+    "companyName": "艾比互動娛樂有限公司",
+    "companyIntro": "艾比互動娛樂有限公司 致力於用 AI 讓每家企業都能擁有世界級的資安防護能力。\n我們的核心產品 SOC.cool 是一套 AI 驅動的資安監控平台，讓企業無需自建 SOC 團隊，即可擁有 24/7 全天候威脅偵測與自動化回應能力。\n解決三大痛點：\n- 資安人才難尋：AI 自動分析告警、研判風險並執行回應劇本，大幅降低對專業資安人力的依賴，1 人即可掌控全局\n- 預算有限效益要最大：以 SaaS 訂閱制取代高額自建方案，將資源集中在核心業務發展，資安交給 AI 守護\n- 合規要求日益嚴格：內建 ISO 27001、SOC 2 等合規報告模板，一鍵產出稽核文件，從容應對客戶與法規要求\n平台支援 Windows、Linux、macOS 全平台，10 分鐘內完成部署即開始防護。同時提供經銷夥伴架構，IT 服務商可快速以自有品牌為客戶提供託管式資安服務（MSSP）。\n 讓每家企業都能用 AI 守護數位資產，是我們的使命。",
+    "websiteUrl": "https://soc.cool/",
+    "solutionNames": [
+      "SOC.cool AI資安防護企業包 - 新北產業AI化輔導計畫限定版"
+    ],
+    "logoFileName": "艾比互動娛樂.png"
+  },
+  {
+    "companyShortName": "華苓科技",
+    "companyName": "華苓科技股份有限公司",
+    "companyIntro": "華苓科技成立於1999年，為中大型商務軟體公司，以企業流程管理系統著稱，面對大數據、社群、人工智能、雲計算、移動裝置、物聯網、區塊鏈等數位科技共同將世界推向工業4.0與數位經濟時代。華苓遂以「賦能智慧、願景無限」為願景，推出「智慧系統」以達成融合數位科技與人、系統、智能物件的萬物協同，賦與企業轉型能力以取得競爭優勢。",
+    "websiteUrl": "https://www.flowring.com/",
+    "solutionNames": [
+      "Secorion 資安獵捕平台"
+    ],
+    "logoFileName": "華苓科技.png"
+  },
+  {
+    "companyShortName": "極風雲創",
+    "companyName": "極風雲創股份有限公司",
+    "companyIntro": "極風雲創 Twister5 (股票代碼 7826 )，是 AI 驅動的全域安全與 AI 治理平台供應商，專注協助企業在雲端與生成式 AI 時代，建立安全、可控且可持續的防護架構。\n我們結合國際頂尖資安品牌（如 Cloudflare、Cato Networks、Palo Alto Networks）與自研平台 Across，為企業提供從網路、應用到 AI 使用層的整合式全域安全解決方案。",
+    "websiteUrl": "https://www.twister5.com.tw/",
+    "solutionNames": [
+      "Across智能資安維運管理平台"
+    ],
+    "logoFileName": "極風雲創.png"
+  },
+  {
+    "companyShortName": "卡菲卡金融科技",
+    "companyName": "卡菲卡金融科技股份有限公司",
+    "companyIntro": "卡菲卡金融科技致力於驅動企業的「智能」與「綠色」雙軸轉型。我們自主研發的 AI 模型「費思」，深度整合財務審計的嚴謹性與環境工程邏輯，是業界領先的綠色金融智慧核心。\n\n透過 AI 自動化識別與分類，費思能精確勾稽企業每一筆財務支出與其對應的碳足跡，打破資訊孤島，讓財務報表與減碳績效實現無縫接軌。這不僅大幅提升了溫室氣體盤查的效率，更能協助企業精準預測並節約碳費支出。\n\n我們不只是技術提供者，更是企業邁向淨零碳排最值得信賴的策略夥伴。從智慧審計到淨零輔導，卡菲卡協助您將複雜的環境數據轉化為實質的競爭優勢，讓永續經營成為企業獲利的嶄新動力。",
+    "websiteUrl": "https://isunfa.com",
+    "solutionNames": [
+      "新北企業淨零智能會計賦能專案"
+    ],
+    "logoFileName": "卡菲卡金融科技.png"
+  },
+  {
+    "companyShortName": "拉普拉斯智能科技",
+    "companyName": "拉普拉斯智能科技股份有限公司",
+    "companyIntro": "拉普拉斯智能科技推出 Akashic 多代理 AI 平台，結合通用報告生成、AI 助理與可治理的知識管理能力，為用戶提供高效率且可擴充的智慧內容工作流。平台透過可治理模板引擎、多代理協作與跨系統整合，協助快速產出高品質報告並提升作業效率，支援從日常到專業場景的多元應用。",
+    "websiteUrl": "https://www.laplaceai.co/",
+    "solutionNames": [
+      "Akashic 多代理 AI 平台"
+    ],
+    "logoFileName": "拉普拉斯智能科技.png"
+  },
+  {
+    "companyShortName": "虎智科技",
+    "companyName": "虎智科技股份有限公司",
+    "companyIntro": "虎智科技經校內創業比賽第一名為臺科大傑出校友聯誼會攜手創新育成中心， 投資成立的創業團隊。以協助任何公司都可以輕鬆導入人工智慧。\n致力以博碩士專業團隊、結盟傑出校友資源、臺科大教授顧問研發資源三大優勢發展 Local GPT 硬體導入、 AI 服務啟動、GPU 服務器資源管理，協助產業從教育訓練開始、評估／導入 AI 產業解決方案、資訊安全，確保 AI 綜效最大化與成功。",
+    "websiteUrl": "https://www.tigerai.info/",
+    "solutionNames": [
+      "以 n8n 打造 AI 智能助理-導入 no code 自動化流程運用"
+    ],
+    "logoFileName": "虎智科技.png"
+  },
+  {
+    "companyShortName": "凱鈿行動科技",
+    "companyName": "凱鈿行動科技股份有限公司",
+    "companyIntro": "KDAN（凱鈿）是數位賦能的領導品牌，專注於提升企業跨平台文件交流效率，推動數據驅動決策，打造無縫接軌的工作流程體驗，並提供多元化的私有化部署服務，強化企業敏捷性，釋放無限商機。",
+    "websiteUrl": "https://www.kdan.com/",
+    "solutionNames": [
+      "Intelligence Document Processing(IDP)"
+    ],
+    "logoFileName": "凱鈿行動科技.png"
+  },
+  {
+    "companyShortName": "肆時資訊設計",
+    "companyName": "肆時資訊設計有限公司",
+    "companyIntro": "肆時資訊設計有限公司自2019年成立以來，以資訊×服務設計為核心，專注於創新車輛產業數位管理，ReMo瑞摩智能雲端管理系統，結合工單數位化、顧客互動、法規遵循與供應鏈整合，打造全方位智慧生態系，協助機車行突破營運瓶頸，邁向數據化決策。公司具備豐富專案能量，曾執行深度高雄機車智慧產業整合計畫、數位雲服務研發補助計畫等，已推廣超過千家車行完成數位化導入，並導入 AI 技術提升維修管理效率。\n在成果驗證上，榮獲交通部公路局第一屆資料創新應用競賽社會組創新獎；並受邀參與2024 Meet Taipei、2025國際中小企業博覽會、2025高雄智慧城市展等指標性展會。肆時資訊將持續以「降低導入門檻、放大工具槓桿、累積數據價值」為方向。",
+    "websiteUrl": "https://remo.tw/",
+    "solutionNames": [
+      "車輛產業AI店面管理解決方案"
+    ],
+    "logoFileName": "肆時資訊設計.png"
+  },
+  {
+    "companyShortName": "詮通電腦",
+    "companyName": "詮通電腦有限公司",
+    "companyIntro": "詮通電腦創立於2002年，深耕企業服務二十載，以深厚研發底蘊打造錢老闆雲端平台。「錢老闆」將系統轉化為您的「數位員工」，已協助數百家中小企業整合線上Ai網路開店、批發訂貨、門市POS系統，蝦皮電商整合，實現進銷存數據一站式管理，成功打通O2O銷售模式。\n讓您在單一平台掌握各方銷售與即時庫存，徹底告別資訊破碎與混亂的理帳痛點。不只是處理訂單，這位員工更擅長財務管理，並自動為您整理應收付帳款核銷。並即時產出損益報表，讓您隨時掌握獲利狀況，進而透過數據做出精準決策。",
+    "websiteUrl": "https://www.moneyboss.com.tw/",
+    "solutionNames": [
+      "Ai網路開店+雲端POS+蝦皮整合+進銷存整合方案"
+    ],
+    "logoFileName": "詮通電腦.png"
+  },
+  {
+    "companyShortName": "睿力智能運動",
+    "companyName": "睿力智能運動有限公司",
+    "companyIntro": "睿力智能運動（ATTRAKFIT）深耕智慧運動科技，結合 IoT 與自動阻力演算法，推出智慧訓練車、外掛式虛擬騎乘升級模組、力量感測踏板等，協助家用與健身房精準化訓練。我們致力於讓運動科學與娛樂體驗無縫接軌，不僅提供硬體方案，更透過 AI 技術驅動數位轉型。\n\n在拓展業務過程中，我們深刻體會到產業的共同痛點：無論是通路商或製造商，都專注於產品銷售與製造本業，對於行銷推廣感到力不從心——聘請專職行銷人員成本高昂，外包又難以掌控品質，社群經營更是耗時費力。因此我們導入 AI 自動化行銷技術，不僅解決自身需求，更將這套系統服務化，協助同業夥伴以更低成本、更高效率進行多通路行銷與客戶開發。",
+    "websiteUrl": "attrakfit.com",
+    "solutionNames": [
+      "企業AI行銷獲客一站式解決方案"
+    ],
+    "logoFileName": "睿力智能運動.png"
+  },
+  {
+    "companyShortName": "數辰創藝科技",
+    "companyName": "數辰創藝科技股份有限公司",
+    "companyIntro": "數辰專注於 AI 軟體開發與數位解決方案，致力於為企業打造更高效、更智能的營運模式。我們的TeamSync 企業智能協作平台，結合 AI 聊天室與知識管理系統，重塑內部溝通模式，讓資訊流動更順暢、員工訓練更高效。我們亦運用 AI 技術精準鎮定目標客群，結合短影音、社群行銷與數位廣告代操，為品牌量身打造高效的市場拓展策略。透過 AI 創新與數據驅動的行銷策略，我們助力企業在競爭激烈的市場中脫穎而出。",
+    "websiteUrl": "https://shuchenai.com/",
+    "solutionNames": [
+      "TeamSync 企業AI 協作作業系統方案"
+    ],
+    "logoFileName": "數辰創藝科技.png"
+  }
+]
