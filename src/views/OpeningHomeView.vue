@@ -1,7 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import openingVideo from '../assets/opening.mp4'
 import openingImage from '../assets/opening.png'
 import banner1 from '../assets/banner1.png'
 import banner2 from '../assets/banner2.png'
@@ -13,7 +12,7 @@ const banners = [
   { id: 3, title: '首頁輪播 3', src: banner3 },
 ]
 
-const stage = ref('video')
+const stage = ref('ready')
 const activeIndex = ref(0)
 const selectedBanner = ref(null)
 const touchStartX = ref(0)
@@ -24,24 +23,7 @@ let timerId
 let suppressTimerId
 
 const isOverlayVisible = computed(() => stage.value !== 'home')
-const isVideoStage = computed(() => stage.value === 'video')
 const isReadyStage = computed(() => stage.value === 'ready')
-
-const toReadyStage = () => {
-  stage.value = 'ready'
-}
-
-const onVideoEnded = () => {
-  toReadyStage()
-}
-
-const onVideoError = () => {
-  toReadyStage()
-}
-
-const skipOpening = () => {
-  toReadyStage()
-}
 
 const enterHome = () => {
   stage.value = 'home'
@@ -255,37 +237,11 @@ onMounted(() => {
 
     <div v-if="isOverlayVisible" class="opening-overlay">
       <div class="opening-backdrop">
-        <video
-          v-if="isVideoStage"
-          class="opening-backdrop-media opening-backdrop-video"
-          :src="openingVideo"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-        ></video>
-        <img v-else class="opening-backdrop-media opening-backdrop-image" :src="openingImage" alt="開場背景" />
+        <img class="opening-backdrop-media opening-backdrop-image" :src="openingImage" alt="開場背景" />
       </div>
 
-      <div v-if="isVideoStage" class="opening-frost"></div>
-
       <div class="opening-stage">
-        <div v-if="isVideoStage" class="opening-video-shell">
-          <video
-            class="opening-main-video"
-            :src="openingVideo"
-            autoplay
-            muted
-            playsinline
-            preload="auto"
-            @ended="onVideoEnded"
-            @error="onVideoError"
-          ></video>
-          <button type="button" class="skip-btn" @click="skipOpening">SKIP</button>
-        </div>
-
-        <div v-else-if="isReadyStage" class="ready-content">
+        <div v-if="isReadyStage" class="ready-content">
           <h2 class="ready-title">新北產業AI化輔導計畫</h2>
           <p class="ready-subtitle">New Taipei City Industrial AI Mentoring Program</p>
           <button type="button" class="enter-home-btn pulse-glow" @click="enterHome">開始探索</button>
@@ -420,23 +376,9 @@ onMounted(() => {
   object-fit: cover;
 }
 
-.opening-backdrop-video {
-  transform: scale(1.08);
-  filter: blur(28px) saturate(1.08) brightness(0.72);
-}
-
 .opening-backdrop-image {
   transform: none;
   filter: none;
-}
-
-.opening-frost {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 56%),
-    linear-gradient(180deg, rgba(6, 8, 28, 0.24) 0%, rgba(6, 8, 28, 0.44) 100%);
-  backdrop-filter: blur(2px);
 }
 
 .opening-stage {
@@ -446,42 +388,6 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.opening-video-shell {
-  position: relative;
-  display: inline-flex;
-  line-height: 0;
-}
-
-.opening-main-video {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100vw;
-  max-height: 100dvh;
-  object-fit: contain;
-  border-radius: 0;
-  box-shadow: 0 20px 52px rgba(5, 9, 38, 0.42);
-}
-
-.skip-btn {
-  position: absolute;
-  top: clamp(10px, 1.8vh, 18px);
-  right: clamp(10px, 1.5vw, 18px);
-  padding: 20px 20px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  background: rgba(17, 27, 80, 0.58);
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  backdrop-filter: blur(8px);
-}
-
-.skip-btn:hover {
-  background: rgba(27, 42, 120, 0.75);
 }
 
 .ready-content {
@@ -649,11 +555,6 @@ onMounted(() => {
     padding: 12px 26px;
     border-radius: 14px;
     font-size: clamp(1.25rem, 7.2vw, 1.75rem);
-  }
-
-  .skip-btn {
-    padding: 10px 15px;
-    font-size: 0.95rem;
   }
 
   .home-carousel-viewport {
