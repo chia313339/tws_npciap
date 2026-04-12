@@ -28,9 +28,19 @@ const highlights = [
     <div class="container">
       <div class="content-panel">
         <header class="title-row">
-          <span class="title-line"></span>
-          <h1>關於計畫</h1>
-          <span class="title-line"></span>
+          <div class="about-title-wrap">
+            <span class="title-line"></span>
+            <h1>關於計畫</h1>
+            <span class="title-line"></span>
+          </div>
+          <a
+            class="about-apply-link"
+            href="https://drive.google.com/drive/folders/1789FI1WmaAaVV_w6f5kl1i1-whT4AN_X"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            申請須知與申請表
+          </a>
         </header>
 
         <article class="about-copy">
@@ -62,6 +72,52 @@ const highlights = [
 </template>
 
 <style scoped>
+.title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+}
+
+.about-title-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.about-title-wrap h1 {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.about-apply-link {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2b49c3 0%, #1e2f8f 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(36, 56, 168, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-apply-link:hover {
+  transform: translateY(calc(-50% - 1px));
+  box-shadow: 0 18px 32px rgba(36, 56, 168, 0.24);
+}
+
 .about-copy {
   display: grid;
   gap: 12px;
@@ -132,6 +188,23 @@ const highlights = [
 }
 
 @media (max-width: 720px) {
+  .title-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    min-height: unset;
+  }
+
+  .about-title-wrap {
+    width: 100%;
+  }
+
+  .about-apply-link {
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
   .about-highlights {
     grid-template-columns: 1fr;
   }
