@@ -1,6 +1,9 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import vendorCompanies from '../../data/vendorCompanies.generated.json'
+import metadataRows from '../../data/metadata.generated.json'
+import { categoryNavItems } from '../../data/catalogData'
 
 const PAGE_SIZE = 15
 
@@ -16,9 +19,50 @@ const normalizeUrl = (value) => {
   return `https://${text}`
 }
 
+const toText = (value) => String(value ?? '').trim()
+
+const categorySlugMap = new Map(categoryNavItems.map((item) => [item.label, item.slug]))
+
+const solutionCategoryMap = new Map()
+metadataRows.forEach((row) => {
+  const solutionName = toText(row.solutionName)
+  const category = toText(row.category)
+  const companyName = toText(row.companyName)
+  const companyShortName = toText(row.companyShortName)
+  const slug = categorySlugMap.get(category)
+
+  if (!solutionName || !slug) {
+    return
+  }
+
+  const routePath = `/categories/${slug}`
+  if (companyName) {
+    solutionCategoryMap.set(`${companyName}::${solutionName}`, routePath)
+  }
+  if (companyShortName) {
+    solutionCategoryMap.set(`${companyShortName}::${solutionName}`, routePath)
+  }
+  if (!solutionCategoryMap.has(solutionName)) {
+    solutionCategoryMap.set(solutionName, routePath)
+  }
+})
+
 const suppliers = vendorCompanies.map((item) => ({
   ...item,
   websiteUrl: normalizeUrl(item.websiteUrl),
+  solutionLinks: (item.solutionNames || []).map((solutionName) => {
+    const normalizedName = toText(solutionName)
+    const routePath =
+      solutionCategoryMap.get(`${toText(item.companyName)}::${normalizedName}`) ||
+      solutionCategoryMap.get(`${toText(item.companyShortName)}::${normalizedName}`) ||
+      solutionCategoryMap.get(normalizedName) ||
+      ''
+
+    return {
+      label: normalizedName,
+      to: routePath,
+    }
+  }),
   logo:
     item.logoFileName && logoModules[`/src/assets/solutions/logo/${item.logoFileName}`]
       ? logoModules[`/src/assets/solutions/logo/${item.logoFileName}`]
@@ -127,9 +171,19 @@ const closeSupplierModal = () => {
             <p class="supplier-modal-intro">{{ selectedSupplier.companyIntro || '暫無公司簡介。' }}</p>
 
             <div class="supplier-modal-tags">
-              <span v-for="solutionName in selectedSupplier.solutionNames" :key="solutionName" class="supplier-solution-tag">
-                {{ solutionName }}
-              </span>
+              <template v-for="solution in selectedSupplier.solutionLinks" :key="solution.label">
+                <RouterLink
+                  v-if="solution.to"
+                  :to="solution.to"
+                  class="supplier-solution-tag supplier-solution-tag--link"
+                  @click="closeSupplierModal"
+                >
+                  {{ solution.label }}
+                </RouterLink>
+                <span v-else class="supplier-solution-tag">
+                  {{ solution.label }}
+                </span>
+              </template>
             </div>
           </section>
         </div>
@@ -332,6 +386,18 @@ const closeSupplierModal = () => {
   font-size: clamp(1rem, 0.96rem + 0.24vw, 1.28rem);
   font-weight: 700;
   line-height: 1.25;
+}
+
+.supplier-solution-tag--link {
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.supplier-solution-tag--link:hover,
+.supplier-solution-tag--link:focus-visible {
+  background: #243a98;
+  box-shadow: 0 10px 20px rgba(36, 58, 152, 0.22);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 1200px) {
