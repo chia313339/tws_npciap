@@ -1,74 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-
-const faqs = [
-  {
-    question: '哪些企業可以申請本計畫？',
-    answer: `需同時符合以下條件：
-• 依法完成公司或商業登記
-• 公司、分公司或工廠登記於新北市轄內
-• 非陸資企業或外國營利事業在臺分公司
-• 非政府機關及其附屬單位
-• 最近3年內無重大違法或欠稅情形`,
-  },
-  {
-    question: '本計畫補助金額是多少？需要自籌款嗎？',
-    answer: `• 每家企業最高補助 新臺幣4萬元
-• 採實報實銷
-• 企業需自籌至少 50%以上經費
-• 須先全額支付AI服務費用後，始得申請補助款`,
-  },
-  {
-    question: '補助是先撥款還是後核銷？',
-    answer:
-      '採「先購置、後核銷」方式。企業須先完成與AI服務供應商簽約並支付費用，於規定期限內檢附發票、合約等文件辦理請款。',
-  },
-  {
-    question: '如果公司已申請其他政府AI數位轉型補助，還可以申請本計畫嗎？',
-    answer:
-      '若所購買之AI應用服務方案與其他政府補助計畫屬「同一或相同性質項目」，則不得重複補助。\n不同補助項目且未重疊者，須由審查單位認定。',
-  },
-  {
-    question: '申請截止時間是什麼時候？',
-    answer: `• 依公告日期申請
-• 並依徵件情況適時召開審查會議`,
-  },
-  {
-    question: '審查重點是什麼？如何提高通過率？',
-    answer: `審查配分如下：
-• 需求描述（60%）：痛點明確性、方案與需求契合度、內部資源匹配度
-• 預期效益（40%）：是否具體量化、是否可驗證
-
-建議：
-• 清楚描述現況問題
-• 說明選擇該AI方案的原因
-• 提出具體KPI（如降低成本%、提升產能%、增加營收等）`,
-  },
-  {
-    question: '一定要從指定AI服務供應商中選擇方案嗎？',
-    answer: '是。本計畫僅限選擇經公開遴選通過並公告之AI服務供應商方案。',
-  },
-  {
-    question: '入選後一定要配合哪些事項？',
-    answer: `入選企業需：
-• 與AI服務供應商完成簽約
-• 配合顧問訪視與輔導
-• 配合計畫宣傳（如公關稿、活動參與、案例分享等）`,
-  },
-  {
-    question: '申請需要繳交哪些文件？',
-    answer: `1. 受輔導企業申請表（Word檔＋用印PDF檔）
-2. 個資同意書（需簽署）
-3. 其他審查所需資料
-4. 切結書
-
-請於期限內 Email 寄送至：ntpcai@twcloud.ai`,
-  },
-  {
-    question: '是否只能購買一項方案？',
-    answer: '否。企業可依需求選擇多項AI應用服務方案。',
-  },
-]
+import { faqs } from '../data/faqData'
 
 const openIndexes = ref([])
 
@@ -95,7 +27,7 @@ const isOpen = (index) => openIndexes.value.includes(index)
         </header>
 
         <div class="faq-list">
-          <article v-for="(faq, index) in faqs" :key="faq.question" class="faq-item">
+          <article v-for="(faq, index) in faqs" :key="faq.question" class="faq-item" :class="{ open: isOpen(index) }">
             <button
               class="faq-trigger"
               type="button"
@@ -104,8 +36,11 @@ const isOpen = (index) => openIndexes.value.includes(index)
               @click="toggleFaq(index)"
             >
               <span class="faq-index">{{ index + 1 }}</span>
-              <span class="faq-question">{{ faq.question }}</span>
-              <span class="faq-chevron" :class="{ open: isOpen(index) }" aria-hidden="true">⌄</span>
+              <span class="faq-main">
+                <span class="faq-question">{{ faq.question }}</span>
+                <span class="faq-divider" aria-hidden="true"></span>
+              </span>
+              <i class="fa-solid fa-chevron-down faq-chevron" :class="{ open: isOpen(index) }" aria-hidden="true"></i>
             </button>
 
             <div v-show="isOpen(index)" :id="`faq-answer-${index}`" class="faq-answer">
@@ -119,7 +54,135 @@ const isOpen = (index) => openIndexes.value.includes(index)
 </template>
 
 <style scoped>
+.faq-list {
+  --faq-accent: #173ca8;
+  --faq-index-size: clamp(56px, 4.8vw, 78px);
+  --faq-gap: clamp(14px, 1.8vw, 18px);
+  display: grid;
+  gap: clamp(28px, 3vw, 38px);
+}
+
+.faq-item {
+  border: 0;
+  background: transparent;
+}
+
+.faq-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: var(--faq-index-size) minmax(0, 1fr) 32px;
+  align-items: center;
+  column-gap: var(--faq-gap);
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--faq-accent);
+}
+
+.faq-trigger:hover,
+.faq-trigger:focus-visible {
+  transform: none;
+}
+
+.faq-main {
+  min-width: 0;
+  display: grid;
+  align-items: center;
+}
+
+.faq-index {
+  width: var(--faq-index-size);
+  height: var(--faq-index-size);
+  min-width: var(--faq-index-size);
+  min-height: var(--faq-index-size);
+  max-width: var(--faq-index-size);
+  max-height: var(--faq-index-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 var(--faq-index-size);
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--faq-accent);
+  color: #ffffff;
+  font-size: clamp(1.8rem, 2.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.faq-question {
+  display: block;
+  color: var(--faq-accent);
+  font-size: clamp(1.3rem, 1rem + 1vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.faq-divider {
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--faq-accent) 0%, var(--faq-accent) 88%, rgba(23, 60, 168, 0.18) 100%);
+}
+
+.faq-chevron {
+  justify-self: end;
+  color: var(--faq-accent);
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.22s ease;
+}
+
+.faq-chevron.open {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  margin-left: calc(var(--faq-index-size) + var(--faq-gap));
+  margin-top: 14px;
+  padding: 2px 0 0;
+  background: transparent;
+  color: #24314f;
+}
+
 .faq-answer-text {
+  margin: 0;
   white-space: pre-line;
+  font-size: clamp(1rem, 0.95rem + 0.18vw, 1.12rem);
+  line-height: 1.9;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .faq-list {
+    --faq-index-size: 50px;
+    --faq-gap: 12px;
+    gap: 24px;
+  }
+
+  .faq-trigger {
+    grid-template-columns: var(--faq-index-size) minmax(0, 1fr) 24px;
+  }
+
+  .faq-question {
+    font-size: clamp(1.05rem, 0.96rem + 0.65vw, 1.3rem);
+  }
+
+  .faq-divider {
+    margin-top: 10px;
+    height: 2px;
+  }
+
+  .faq-chevron {
+    font-size: 1.15rem;
+  }
+
+  .faq-answer {
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 </style>

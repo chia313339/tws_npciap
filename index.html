@@ -10,20 +10,23 @@
     <div id="app"></div>
     <script>
       window.WebchatConfig = {
-        platformId: "46411a19",
-        platformName: "經發局測試",
+        platformId: "975514e0",
+        platformName: "AI 媒合小幫手",
+        assetBaseUrl: "https://cos.twcc.ai/eddtwai/webchatcomponent",
+        sendButtonUrl: "https://cos.twcc.ai/eddtwai/webchatcomponent/send-icon4.png",
         chatIconUrl:
-          "https://crossbotclientdata.s3.ap-northeast-1.amazonaws.com/0cf2d594-77a5-425f-865b-2f70be5cd96c/46411a19/Avatar.gif",
+          "https://cos.twcc.ai/eddtwai2/webchatcomponent/chatboticon/3dbf5da4-3c46-4e46-a8a5-fa4edd092726/975514e0/%E6%96%B0%E5%8C%97%E7%B6%93%E7%99%BC%E5%B1%80_%E9%BE%8D%E5%A5%BD(%E8%97%8D).png",
         botIconUrl:
-          "https://crossbotclientdata.s3.ap-northeast-1.amazonaws.com/0cf2d594-77a5-425f-865b-2f70be5cd96c/46411a19/Avatar.gif",
+          "https://cos.twcc.ai/eddtwai2/webchatcomponent/chatboticon/3dbf5da4-3c46-4e46-a8a5-fa4edd092726/975514e0/%E6%96%B0%E5%8C%97%E7%B6%93%E7%99%BC%E5%B1%80_%E9%BE%8D%E5%A5%BD(%E8%97%8D).png",
         defaultCorner: "右下角",
+        baseUrl: "https://edb.crossbot.com.tw/api",
       };
     </script>
-    <script src="https://webchatcomponent.s3.ap-northeast-1.amazonaws.com/webchat-component.js"></script>
+    <script src="https://cos.twcc.ai/eddtwai/webchatcomponent/webchat-component.js"></script>
     <style>
       #chat-icon {
-        width: 68px !important;
-        height: 68px !important;
+        width: 102px !important;
+        height: 102px !important;
         background-color: transparent !important;
         background-size: contain !important;
         background-repeat: no-repeat !important;
@@ -39,15 +42,27 @@
         bottom: 20px !important;
       }
 
+      #chat-icon.corner-bottom-left {
+        top: auto !important;
+        left: 20px !important;
+        right: auto !important;
+        bottom: 20px !important;
+      }
+
       @media (max-width: 768px), (pointer: coarse) and (orientation: landscape) and (max-width: 1024px) {
         #chat-icon.corner-bottom-right {
           right: 16px !important;
           bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
         }
 
+        #chat-icon.corner-bottom-left {
+          left: 16px !important;
+          bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+        }
+
         #chat-icon {
-          width: 56px !important;
-          height: 56px !important;
+          width: 84px !important;
+          height: 84px !important;
         }
 
         #chat-popup,

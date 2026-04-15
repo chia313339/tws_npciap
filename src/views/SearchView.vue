@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import Fuse from 'fuse.js'
 import metadataRows from '../data/metadata.generated.json'
 import vendorCompanies from '../data/vendorCompanies.generated.json'
+import { faqs } from '../data/faqData'
 import { categoryNavItems } from '../data/catalogData'
 
 const searchQuery = ref('')
@@ -105,6 +106,8 @@ const vendorKeywordText = vendorCompanies
   )
   .join(' ')
 
+const faqKeywordText = faqs.map((item) => [item.question, item.answer].filter(Boolean).join(' ')).join(' ')
+
 const getCategorySpecificText = (categoryLabel) =>
   metadataRows
     .filter((row) => row.category === categoryLabel)
@@ -118,6 +121,10 @@ const getPageScopeText = (meta) => {
 
   if (meta.path === '/categories') {
     return categoriesKeywordText
+  }
+
+  if (meta.path === '/faq') {
+    return faqKeywordText
   }
 
   if (meta.path.startsWith('/categories/')) {

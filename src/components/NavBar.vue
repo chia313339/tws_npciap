@@ -80,7 +80,7 @@ watch(
       <RouterLink class="brand hover-scale" to="/">
         <span class="brand-title">
           <span class="brand-line brand-line--small">新北產業</span>
-          <span class="brand-line">AI化輔導計劃</span>
+          <span class="brand-line">AI化輔導計畫</span>
         </span>
       </RouterLink>
 
