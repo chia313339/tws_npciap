@@ -3,13 +3,13 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import openingImage from '../assets/opening.png'
 import banner1 from '../assets/banner1.png'
-import banner2 from '../assets/banner2.png'
-import banner3 from '../assets/banner3.png'
+// import banner2 from '../assets/banner2.png'
+// import banner3 from '../assets/banner3.png'
 
 const banners = [
   { id: 1, title: '首頁輪播 1', src: banner1 },
-  { id: 2, title: '首頁輪播 2', src: banner2 },
-  { id: 3, title: '首頁輪播 3', src: banner3 },
+  // { id: 2, title: '首頁輪播 2', src: banner2 },
+  // { id: 3, title: '首頁輪播 3', src: banner3 },
 ]
 
 const stage = ref('ready')
@@ -497,7 +497,7 @@ onMounted(() => {
 
 .banner-modal-content img {
   max-width: 100%;
-  max-height: 88dvh;
+  max-height: 90dvh;
   object-fit: contain;
   border-radius: 10px;
 }
