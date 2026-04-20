@@ -24,9 +24,39 @@ let suppressTimerId
 
 const isOverlayVisible = computed(() => stage.value !== 'home')
 const isReadyStage = computed(() => stage.value === 'ready')
+const googleFormUrl =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeYelxk39eefWsEqVVhjjfvbdptAsRJBWkEDd5nY1CgmlJKrA/formResponse'
+const enterpriseOptions = [
+  { id: 'ntpc', label: '我是新北市企業', value: '是' },
+  { id: 'other', label: '其他企業', value: '否' },
+]
 
 const enterHome = () => {
   stage.value = 'home'
+}
+
+const submitEnterpriseChoice = (value) => {
+  const payload = new URLSearchParams({
+    'entry.987539846': value,
+    'entry.987539846_sentinel': value,
+  })
+
+  void fetch(googleFormUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: payload.toString(),
+    keepalive: true,
+  }).catch((error) => {
+    console.warn('Google Form submit failed:', error)
+  })
+}
+
+const selectEnterpriseType = (value) => {
+  submitEnterpriseChoice(value)
+  enterHome()
 }
 
 const openModal = (banner) => {
@@ -244,7 +274,17 @@ onMounted(() => {
         <div v-if="isReadyStage" class="ready-content">
           <h2 class="ready-title">新北產業AI化輔導計畫</h2>
           <p class="ready-subtitle">New Taipei City Industrial AI Mentoring Program</p>
-          <button type="button" class="enter-home-btn pulse-glow" @click="enterHome">開始探索</button>
+          <div class="entry-actions">
+            <button
+              v-for="option in enterpriseOptions"
+              :key="option.id"
+              type="button"
+              class="enter-home-btn pulse-glow"
+              @click="selectEnterpriseType(option.value)"
+            >
+              {{ option.label }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -421,10 +461,19 @@ onMounted(() => {
   text-shadow: 0 3px 12px rgba(3, 8, 42, 0.55);
 }
 
+.entry-actions {
+  width: min(100%, 440px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  margin-top: 50px;
+}
+
 .enter-home-btn {
   position: relative;
-  margin-top: 50px;
-  min-width: 160px;
+  width: 100%;
+  min-width: 0;
   padding: clamp(12px, 1.3vh, 18px) clamp(26px, 2.8vw, 50px);
   border-radius: 16px;
   background: rgba(92, 116, 214, 0.42);
@@ -549,6 +598,12 @@ onMounted(() => {
     margin-top: 14px;
     margin-bottom: 24px;
     font-size: clamp(0.92rem, 4.6vw, 1.2rem);
+  }
+
+  .entry-actions {
+    width: min(100%, 360px);
+    gap: 14px;
+    margin-top: 28px;
   }
 
   .enter-home-btn {
