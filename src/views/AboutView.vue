@@ -18,7 +18,7 @@ const highlights = [
   {
     title: '申請時間',
     icon: 'fa-solid fa-clock',
-    content: '依公告日期',
+    content: '即日起至115年5月15日止',
   },
 ]
 </script>
