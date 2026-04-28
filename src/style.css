@@ -73,11 +73,14 @@ button:hover {
 }
 
 button {
+  appearance: none;
   border: none;
   background: none;
   color: inherit;
   font: inherit;
   cursor: pointer;
+  padding: 0;
+  text-align: inherit;
 }
 
 #app {
@@ -435,9 +438,13 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-.left-tab:focus,
-.left-tab:focus-visible {
+.left-tab:focus {
   outline: none;
+}
+
+.left-tab:focus-visible {
+  outline: 3px solid rgba(27, 44, 149, 0.8);
+  outline-offset: -7px;
 }
 
 .left-tab--stack-1 {
@@ -988,6 +995,7 @@ button {
 }
 
 .solution-card {
+  width: 100%;
   background: #ffffff;
   border-radius: 18px;
   border: 1px solid rgba(28, 30, 127, 0.08);
@@ -997,6 +1005,8 @@ button {
   grid-template-rows: 210px 1fr;
   min-height: 420px;
   cursor: pointer;
+  color: inherit;
+  text-align: inherit;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1038,7 +1048,8 @@ button {
   align-content: start;
 }
 
-.solution-body h3 {
+.solution-body h3,
+.solution-card-title {
   margin: 0;
   color: var(--primary-dark);
   font-size: 1.05rem;
@@ -1613,7 +1624,8 @@ button {
     gap: 8px;
   }
 
-  .solution-body h3 {
+  .solution-body h3,
+  .solution-card-title {
     font-size: 1.32rem;
     min-height: 2.7em;
   }

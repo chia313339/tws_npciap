@@ -226,18 +226,22 @@ const searchResults = computed(() => {
       <br>
       <br>
 
-      <div class="search-area">
+      <form class="search-area" role="search" @submit.prevent>
+        <label class="sr-only" for="site-search-input">站內搜尋關鍵字</label>
         <input
+          id="site-search-input"
           v-model="searchQuery"
           class="search-input"
           type="search"
           placeholder="請輸入關鍵字開始搜尋..."
-          aria-label="搜尋網站頁面"
+          title="搜尋網站頁面"
+          autocomplete="off"
         />
-      </div>
+      </form>
 
       <div class="search-results">
-        <p v-if="!normalizedQuery" class="search-hint"></p>
+        <h2 class="sr-only">搜尋結果</h2>
+        <p v-if="!normalizedQuery" class="search-hint">請輸入關鍵字搜尋網站頁面。</p>
         <p v-else-if="searchResults.length === 0" class="search-hint">查無符合頁面，請嘗試其他關鍵字。</p>
 
         <ul v-else class="result-list">

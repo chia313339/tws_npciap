@@ -6,8 +6,15 @@ import banner1 from '../assets/banner1.png'
 // import banner2 from '../assets/banner2.png'
 // import banner3 from '../assets/banner3.png'
 
+const pageTitle = '新北產業AI化輔導計畫'
+
 const banners = [
-  { id: 1, title: '首頁輪播 1', src: banner1 },
+  {
+    id: 1,
+    title: '政府補助挺你AI轉型',
+    alt: '115年度新北產業 AI 化輔導計畫：政府補助挺你 AI 轉型，降低導入門檻，報名時間即日起至 115 年 5 月 15 日。',
+    src: banner1,
+  },
   // { id: 2, title: '首頁輪播 2', src: banner2 },
   // { id: 3, title: '首頁輪播 3', src: banner3 },
 ]
@@ -220,17 +227,20 @@ onMounted(() => {
       <div class="content-panel">
         <header class="title-row">
           <span class="title-line"></span>
-          <h1></h1>
+          <h1 class="sr-only">{{ pageTitle }}</h1>
           <span class="title-line"></span>
         </header>
 
         <section
           class="home-carousel"
+          role="region"
+          aria-labelledby="home-carousel-heading"
           @mouseenter="stopAutoPlay"
           @mouseleave="startAutoPlay"
           @focusin="stopAutoPlay"
           @focusout="startAutoPlay"
         >
+          <h2 id="home-carousel-heading" class="sr-only">首頁重點資訊輪播</h2>
           <div
             class="home-carousel-viewport"
             @touchstart.passive="onTouchStart"
@@ -244,14 +254,15 @@ onMounted(() => {
                   type="button"
                   class="home-slide-trigger"
                   :aria-label="`放大檢視 ${banner.title}`"
+                  :title="`放大檢視 ${banner.title}`"
                   @click="onSlideClick(banner)"
                 >
-                  <img :src="banner.src" :alt="banner.title" />
+                  <img :src="banner.src" :alt="banner.alt || banner.title" />
                 </button>
               </figure>
             </div>
           </div>
-          <div class="home-carousel-indicators" aria-label="首頁輪播指示器">
+          <div class="home-carousel-indicators" role="group" aria-label="首頁輪播指示器">
             <button
               v-for="(banner, index) in banners"
               :key="banner.id"
@@ -259,22 +270,34 @@ onMounted(() => {
               class="home-indicator"
               :class="{ active: index === activeIndex }"
               :aria-label="`切換到第 ${index + 1} 張圖片`"
+              :title="`切換到第 ${index + 1} 張圖片：${banner.title}`"
+              :aria-current="index === activeIndex ? 'true' : undefined"
+              :aria-pressed="(index === activeIndex).toString()"
               @click="goTo(index)"
-            ></button>
+            >
+              <span class="sr-only">第 {{ index + 1 }} 張：{{ banner.title }}</span>
+            </button>
           </div>
         </section>
       </div>
     </div>
 
-    <div v-if="isOverlayVisible" class="opening-overlay">
+    <div
+      v-if="isOverlayVisible"
+      class="opening-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="opening-title"
+      aria-describedby="opening-subtitle"
+    >
       <div class="opening-backdrop">
-        <img class="opening-backdrop-media opening-backdrop-image" :src="openingImage" alt="開場背景" />
+        <img class="opening-backdrop-media opening-backdrop-image" :src="openingImage" alt="" aria-hidden="true" />
       </div>
 
       <div class="opening-stage">
         <div v-if="isReadyStage" class="ready-content">
-          <h2 class="ready-title">新北產業AI化輔導計畫</h2>
-          <p class="ready-subtitle">New Taipei City Industrial AI Mentoring Program</p>
+          <h2 id="opening-title" class="ready-title">{{ pageTitle }}</h2>
+          <p id="opening-subtitle" class="ready-subtitle">New Taipei City Industrial AI Mentoring Program</p>
           <!-- 暫存需求：保留雙按鈕版本 -->
           <!--
           <div class="entry-actions">
@@ -289,17 +312,26 @@ onMounted(() => {
             </button>
           </div>
           -->
-          <button type="button" class="enter-home-btn pulse-glow" @click="enterHome">開始探索</button>
+          <button
+            type="button"
+            class="enter-home-btn pulse-glow"
+            aria-label="開始探索新北產業 AI 化輔導計畫網站"
+            title="開始探索新北產業 AI 化輔導計畫網站"
+            @click="enterHome"
+          >
+            開始探索
+          </button>
         </div>
       </div>
     </div>
 
-    <div v-if="selectedBanner" class="banner-modal" @click.self="closeModal">
+    <div v-if="selectedBanner" class="banner-modal" role="dialog" aria-modal="true" aria-labelledby="banner-modal-title" @click.self="closeModal">
       <div class="banner-modal-content">
-        <button type="button" class="banner-modal-close" aria-label="關閉圖片放大" @click="closeModal">
+        <h2 id="banner-modal-title" class="sr-only">{{ selectedBanner.title }}</h2>
+        <button type="button" class="banner-modal-close" aria-label="關閉圖片放大" title="關閉圖片放大" @click="closeModal">
           ×
         </button>
-        <img :src="selectedBanner.src" :alt="selectedBanner.title" />
+        <img :src="selectedBanner.src" :alt="selectedBanner.alt || selectedBanner.title" />
       </div>
     </div>
   </section>

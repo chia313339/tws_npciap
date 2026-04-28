@@ -24,7 +24,7 @@ const tabClasses = (link, index) => ({
 </script>
 
 <template>
-  <aside class="left-tabs" aria-label="頁面導覽">
+  <nav class="left-tabs" aria-label="頁面導覽">
     <RouterLink
       v-for="(link, index) in tabLinks"
       :key="link.to"
@@ -34,5 +34,5 @@ const tabClasses = (link, index) => ({
     >
       {{ link.label }}
     </RouterLink>
-  </aside>
+  </nav>
 </template>

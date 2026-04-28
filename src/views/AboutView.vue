@@ -38,12 +38,15 @@ const highlights = [
             href="https://drive.google.com/drive/folders/1789FI1WmaAaVV_w6f5kl1i1-whT4AN_X"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="開啟申請須知與申請表（另開新視窗）"
+            title="開啟申請須知與申請表（另開新視窗）"
           >
             申請須知與申請表
           </a>
         </header>
 
         <article class="about-copy">
+          <h2 class="sr-only">計畫說明</h2>
           <p>
             為協助新北市企業加速導入人工智慧技術，提升營運效率與競爭力，新北市政府經濟發展局（下稱主辦單位）委託台灣智慧雲端服務股份有限公司（下稱執行單位）辦理「新北產業AI化輔導計畫」（下稱本計畫）。本計畫旨在回應產業升級與數位轉型需求，透過遴選AI服務供應廠商、輔導媒合本市企業實際導入AI應用方案，提升本市企業的數位競爭力，促進本市產業邁向智慧化與高值化發展。
           </p>
@@ -55,10 +58,11 @@ const highlights = [
           </p>
         </article>
 
-        <section class="about-highlights" aria-label="計畫重點資訊">
+        <section class="about-highlights" aria-labelledby="about-highlights-heading">
+          <h2 id="about-highlights-heading" class="sr-only">計畫重點資訊</h2>
           <article v-for="item in highlights" :key="item.title" class="about-highlight-card">
             <header class="about-highlight-head">
-              <span>{{ item.title }}</span>
+              <h3>{{ item.title }}</h3>
               <i :class="item.icon" aria-hidden="true"></i>
             </header>
             <div class="about-highlight-body">{{ item.content }}</div>
@@ -157,6 +161,13 @@ const highlights = [
   font-size: clamp(1.3rem, 1.15rem + 0.52vw, 1.9rem);
   font-weight: 800;
   line-height: 1.2;
+}
+
+.about-highlight-head h3 {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
 }
 
 .about-highlight-body {

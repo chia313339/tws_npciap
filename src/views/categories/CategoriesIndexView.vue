@@ -13,16 +13,18 @@ import { categoryNavItems } from '../../data/catalogData'
         </header>
       </div>
 
-      <div class="category-nav-grid">
+      <nav class="category-nav-grid" aria-labelledby="category-nav-heading">
+        <h2 id="category-nav-heading" class="sr-only">方案分類清單</h2>
         <RouterLink
           v-for="item in categoryNavItems"
           :key="item.slug"
           class="category-nav-item"
           :to="`/categories/${item.slug}`"
+          :title="item.label"
         >
           {{ item.label }}
         </RouterLink>
-      </div>
+      </nav>
     </div>
   </section>
 </template>

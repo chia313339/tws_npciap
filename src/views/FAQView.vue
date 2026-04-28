@@ -27,10 +27,13 @@ const isOpen = (index) => openIndexes.value.includes(index)
         </header>
 
         <div class="faq-list">
+          <h2 class="sr-only">常見問題列表</h2>
           <article v-for="(faq, index) in faqs" :key="faq.question" class="faq-item" :class="{ open: isOpen(index) }">
             <button
+              :id="`faq-question-${index}`"
               class="faq-trigger"
               type="button"
+              :title="faq.question"
               :aria-expanded="isOpen(index).toString()"
               :aria-controls="`faq-answer-${index}`"
               @click="toggleFaq(index)"
@@ -43,7 +46,7 @@ const isOpen = (index) => openIndexes.value.includes(index)
               <i class="fa-solid fa-chevron-down faq-chevron" :class="{ open: isOpen(index) }" aria-hidden="true"></i>
             </button>
 
-            <div v-show="isOpen(index)" :id="`faq-answer-${index}`" class="faq-answer">
+            <div v-show="isOpen(index)" :id="`faq-answer-${index}`" class="faq-answer" role="region" :aria-labelledby="`faq-question-${index}`">
               <p class="faq-answer-text">{{ faq.answer }}</p>
             </div>
           </article>

@@ -7,9 +7,10 @@ import schedulePlaceholder from '../assets/schedule-placeholder.png'
 const openScheduleImage = () => {
   Swal.fire({
     imageUrl: schedulePlaceholder,
-    imageAlt: '計畫時程圖',
+    imageAlt: '計畫時程圖，說明 AI 服務供應商徵選、企業申請、媒合會、顧問輔導、導入與補助核銷流程。',
     showConfirmButton: false,
     showCloseButton: true,
+    closeButtonAriaLabel: '關閉計畫時程圖',
     customClass: {
       popup: 'schedule-image-swal-popup',
       closeButton: 'solution-swal-close',
@@ -69,8 +70,8 @@ const openScheduleImage = () => {
           </article>
 
           <figure class="schedule-visual">
-            <button type="button" class="schedule-image-trigger" aria-label="放大檢視計畫時程圖" @click="openScheduleImage">
-              <img :src="schedulePlaceholder" alt="計畫時程表暫時示意圖（1024x768）" width="1024" height="768" />
+            <button type="button" class="schedule-image-trigger" aria-label="放大檢視計畫時程圖" title="放大檢視計畫時程圖" @click="openScheduleImage">
+              <img :src="schedulePlaceholder" alt="計畫時程圖，說明 AI 服務供應商徵選、企業申請、媒合會、顧問輔導、導入與補助核銷流程。" width="1024" height="768" />
             </button>
           </figure>
         </div>

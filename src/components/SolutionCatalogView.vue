@@ -36,14 +36,32 @@ const normalizeExternalUrl = (value) => {
   return `https://${text}`
 }
 
+const normalizeEmailHref = (value) => {
+  const text = String(value || '').trim()
+  if (!text || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)) return ''
+  return `mailto:${text}`
+}
+
 const multilineToHtml = (value) => escapeHtml(String(value || '')).replaceAll('\n', '<br />')
 
-const buildContactRow = ({ label, value, href = '' }) => {
+const getCardTitle = (card) =>
+  card.solutionName || card.vendorName || card.companyName || card.cardTitle || card.modalData?.name || '方案'
+
+const getCardCompany = (card) => card.companyName || card.modalData?.companyShortName || card.modalData?.company || ''
+
+const getCardActionLabel = (card) => {
+  const title = getCardTitle(card)
+  const company = getCardCompany(card)
+  return company ? `查看 ${company}「${title}」方案詳細資訊` : `查看「${title}」詳細資訊`
+}
+
+const buildContactRow = ({ label, value, href = '', linkLabel = '' }) => {
   const text = String(value || '').trim()
   if (!text) return ''
 
+  const linkTargetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : ''
   const content = href
-    ? `<a class="solution-modal-contact-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`
+    ? `<a class="solution-modal-contact-link" href="${escapeHtml(href)}"${linkTargetAttrs} aria-label="${escapeHtml(linkLabel || `${label}：${text}`)}" title="${escapeHtml(linkLabel || `${label}：${text}`)}">${escapeHtml(text)}</a>`
     : `<span class="solution-modal-contact-value">${escapeHtml(text)}</span>`
 
   return `
@@ -57,19 +75,32 @@ const buildContactRow = ({ label, value, href = '' }) => {
 
 const openSolutionModal = (card) => {
   const solution = card.modalData || card
+  const solutionTitle = solution.name || card.solutionName || card.companyName || card.cardTitle || card.vendorName || '方案詳細資訊'
   const manualUrl = normalizeExternalUrl(solution.manualUrl)
   const websiteUrl = normalizeExternalUrl(solution.websiteUrl)
+  const contactEmailHref = normalizeEmailHref(solution.contactEmail)
   const imageUrl = solution.detailImage || solution.image || card.logo || ''
-  const imageAlt = `${solution.name || card.solutionName || card.companyName || card.vendorName || '方案'} 示意圖`
+  const imageAlt = `${solutionTitle} 示意圖`
+  const manualButtonLabel = `開啟「${solutionTitle}」操作說明（另開新視窗）`
   const manualButton = manualUrl
-    ? `<a class="solution-modal-manual-btn" href="${escapeHtml(manualUrl)}" target="_blank" rel="noopener noreferrer">點擊看「操作說明」<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></a>`
-    : '<span class="solution-modal-manual-btn solution-modal-manual-btn--disabled">點擊看「操作說明」<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></span>'
+    ? `<a class="solution-modal-manual-btn" href="${escapeHtml(manualUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(manualButtonLabel)}" title="${escapeHtml(manualButtonLabel)}">點擊看「操作說明」<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></a>`
+    : '<span class="solution-modal-manual-btn solution-modal-manual-btn--disabled" aria-disabled="true">尚無操作說明<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></span>'
 
   const contactRowsHtml = [
     buildContactRow({ label: '聯絡人', value: solution.contactPerson }),
     buildContactRow({ label: '公司聯絡電話', value: solution.companyPhone }),
-    buildContactRow({ label: '聯絡信箱', value: solution.contactEmail }),
-    buildContactRow({ label: '公司官網網址', value: solution.websiteUrl, href: websiteUrl }),
+    buildContactRow({
+      label: '聯絡信箱',
+      value: solution.contactEmail,
+      href: contactEmailHref,
+      linkLabel: `寄信給 ${solution.contactPerson || solution.company || '方案聯絡窗口'}：${solution.contactEmail}`,
+    }),
+    buildContactRow({
+      label: '公司官網網址',
+      value: solution.websiteUrl,
+      href: websiteUrl,
+      linkLabel: `前往 ${solution.company || card.companyName || '公司'} 官網（另開新視窗）`,
+    }),
   ]
     .filter(Boolean)
     .join('')
@@ -81,13 +112,13 @@ const openSolutionModal = (card) => {
           <div class="solution-modal-info">
             <p class="solution-modal-tag">${escapeHtml(solution.tag || '')}</p>
             <p class="solution-modal-company">${escapeHtml(solution.company || card.vendorName || card.companyName || '')}</p>
-            <h2 class="solution-modal-title">${escapeHtml(solution.name || card.solutionName || card.companyName || card.cardTitle || card.vendorName || '')}</h2>
+            <h2 id="solution-modal-title" class="solution-modal-title">${escapeHtml(solutionTitle)}</h2>
             <p class="solution-modal-manual">${manualButton}</p>
           </div>
           <figure class="solution-modal-figure">
             ${
               imageUrl
-                ? `<button type="button" class="solution-modal-image-trigger" data-modal-image-trigger aria-label="查看方案大圖"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageAlt)}" /></button>`
+                ? `<button type="button" class="solution-modal-image-trigger" data-modal-image-trigger aria-label="查看「${escapeHtml(solutionTitle)}」大圖" title="查看「${escapeHtml(solutionTitle)}」大圖"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageAlt)}" /></button>`
                 : '<div class="solution-modal-image-placeholder">尚無圖片</div>'
             }
           </figure>
@@ -112,7 +143,7 @@ const openSolutionModal = (card) => {
       ${
         imageUrl
           ? `<div class="solution-modal-lightbox" data-modal-lightbox hidden>
-              <button type="button" class="solution-modal-lightbox-close" data-modal-lightbox-close aria-label="關閉圖片預覽">&times;</button>
+              <button type="button" class="solution-modal-lightbox-close" data-modal-lightbox-close aria-label="關閉圖片預覽" title="關閉圖片預覽">&times;</button>
               <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(imageAlt)}" />
             </div>`
           : ''
@@ -124,6 +155,7 @@ const openSolutionModal = (card) => {
     html: modalHtml,
     showConfirmButton: false,
     showCloseButton: true,
+    closeButtonAriaLabel: '關閉方案詳細資訊',
     customClass: {
       popup: 'solution-swal-popup',
       closeButton: 'solution-swal-close',
@@ -132,6 +164,8 @@ const openSolutionModal = (card) => {
     background: '#ffffff',
     padding: '1.4rem 1.4rem 1.8rem',
     didOpen: (popup) => {
+      popup.setAttribute('aria-labelledby', 'solution-modal-title')
+
       const imageTrigger = popup.querySelector('[data-modal-image-trigger]')
       const lightbox = popup.querySelector('[data-modal-lightbox]')
       const lightboxCloseBtn = popup.querySelector('[data-modal-lightbox-close]')
@@ -167,8 +201,10 @@ const openSolutionModal = (card) => {
         </header>
       </div>
 
+      <h2 class="sr-only">{{ title }}方案列表</h2>
+
       <div class="solutions-grid" :class="{ 'solutions-grid--category': mode === 'category' }">
-        <article
+        <button
           v-for="card in items"
           :key="card.id"
           class="solution-card"
@@ -176,22 +212,21 @@ const openSolutionModal = (card) => {
             'solution-card--category-only': mode === 'category',
             'solution-card--vendor-only': mode === 'vendor',
           }"
-          role="button"
-          tabindex="0"
+          type="button"
+          :aria-label="getCardActionLabel(card)"
+          :title="getCardActionLabel(card)"
           @click="openSolutionModal(card)"
-          @keydown.enter.prevent="openSolutionModal(card)"
-          @keydown.space.prevent="openSolutionModal(card)"
         >
-          <div v-if="mode === 'vendor'" class="solution-image">
-            <img :src="card.logo" :alt="card.vendorName" />
-          </div>
+          <span v-if="mode === 'vendor'" class="solution-image">
+            <img :src="card.logo" :alt="`${card.vendorName} 公司標誌`" />
+          </span>
 
-          <div class="solution-body" :class="{ 'solution-body--category-only': mode === 'category' }">
-            <p v-if="mode === 'category'" class="category-company">{{ card.companyName || card.cardTitle }}</p>
-            <p v-if="mode === 'category'" class="category-solution">{{ card.solutionName }}</p>
-            <h3 v-if="mode === 'vendor'">{{ card.vendorName }}</h3>
-          </div>
-        </article>
+          <span class="solution-body" :class="{ 'solution-body--category-only': mode === 'category' }">
+            <span v-if="mode === 'category'" class="category-company">{{ card.companyName || card.cardTitle }}</span>
+            <span v-if="mode === 'category'" class="category-solution">{{ card.solutionName }}</span>
+            <span v-if="mode === 'vendor'" class="solution-card-title">{{ card.vendorName }}</span>
+          </span>
+        </button>
 
         <div v-if="items.length === 0" class="empty-state">
           <p>{{ emptyText }}</p>
@@ -261,7 +296,7 @@ const openSolutionModal = (card) => {
   align-content: center;
 }
 
-.solution-card--vendor-only .solution-body h3 {
+.solution-card--vendor-only .solution-card-title {
   min-height: 0;
   text-align: center;
 }

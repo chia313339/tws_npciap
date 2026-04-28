@@ -89,6 +89,12 @@ const openSupplierModal = (supplier) => {
 const closeSupplierModal = () => {
   selectedSupplier.value = null
 }
+
+const getSupplierName = (supplier) => supplier.companyName || supplier.companyShortName || 'AI服務供應商'
+
+const getSupplierCardLabel = (supplier) => `查看 ${getSupplierName(supplier)} 供應商詳細資訊`
+
+const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier)} 官網（另開新視窗）`
 </script>
 
 <template>
@@ -102,19 +108,23 @@ const closeSupplierModal = () => {
         </header>
       </div>
 
+      <h2 class="sr-only">AI服務供應商清單</h2>
+
       <div class="vendors-grid">
         <button
           v-for="supplier in pageItems"
           :key="supplier.companyShortName"
           class="vendor-card"
           type="button"
+          :aria-label="getSupplierCardLabel(supplier)"
+          :title="getSupplierCardLabel(supplier)"
           @click="openSupplierModal(supplier)"
         >
           <span class="vendor-logo-wrap">
             <img
               v-if="supplier.logo"
               :src="supplier.logo"
-              :alt="`${supplier.companyShortName} logo`"
+              :alt="`${supplier.companyShortName} 公司標誌`"
             />
             <span v-else class="vendor-logo-placeholder">LOGO</span>
           </span>
@@ -122,7 +132,7 @@ const closeSupplierModal = () => {
         </button>
       </div>
 
-      <div class="vendors-pagination" role="tablist" aria-label="供應商頁面切換">
+      <nav class="vendors-pagination" aria-label="供應商頁面切換">
         <button
           v-for="index in pageCount"
           :key="index"
@@ -130,18 +140,28 @@ const closeSupplierModal = () => {
           :class="{ active: currentPage === index - 1 }"
           type="button"
           :aria-label="`切換到第 ${index} 頁`"
-          :aria-selected="currentPage === index - 1"
+          :title="`切換到第 ${index} 頁`"
+          :aria-current="currentPage === index - 1 ? 'page' : undefined"
+          :aria-pressed="(currentPage === index - 1).toString()"
           @click="changePage(index - 1)"
-        ></button>
-      </div>
+        >
+          <span class="sr-only">第 {{ index }} 頁</span>
+        </button>
+      </nav>
     </div>
   </section>
 
   <Teleport to="body">
     <div v-if="selectedSupplier" class="supplier-modal-backdrop" @click.self="closeSupplierModal">
-      <article class="supplier-modal" role="dialog" aria-modal="true" aria-label="供應商詳細資訊">
-        <button class="supplier-modal-close" type="button" aria-label="關閉視窗" @click="closeSupplierModal">
-          <i class="fa-solid fa-xmark"></i>
+      <article
+        class="supplier-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="supplier-modal-title"
+        aria-describedby="supplier-modal-intro"
+      >
+        <button class="supplier-modal-close" type="button" aria-label="關閉供應商詳細資訊" title="關閉供應商詳細資訊" @click="closeSupplierModal">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
 
         <div class="supplier-modal-layout">
@@ -150,7 +170,7 @@ const closeSupplierModal = () => {
               <img
                 v-if="selectedSupplier.logo"
                 :src="selectedSupplier.logo"
-                :alt="`${selectedSupplier.companyShortName} logo`"
+                :alt="`${selectedSupplier.companyShortName} 公司標誌`"
               />
               <span v-else class="vendor-logo-placeholder">LOGO</span>
             </div>
@@ -161,14 +181,16 @@ const closeSupplierModal = () => {
               class="supplier-website-btn"
               target="_blank"
               rel="noopener noreferrer"
+              :aria-label="getSupplierWebsiteLabel(selectedSupplier)"
+              :title="getSupplierWebsiteLabel(selectedSupplier)"
             >
               官網
             </a>
           </aside>
 
           <section class="supplier-modal-main">
-            <h2 class="supplier-modal-title">{{ selectedSupplier.companyName || selectedSupplier.companyShortName }}</h2>
-            <p class="supplier-modal-intro">{{ selectedSupplier.companyIntro || '暫無公司簡介。' }}</p>
+            <h2 id="supplier-modal-title" class="supplier-modal-title">{{ selectedSupplier.companyName || selectedSupplier.companyShortName }}</h2>
+            <p id="supplier-modal-intro" class="supplier-modal-intro">{{ selectedSupplier.companyIntro || '暫無公司簡介。' }}</p>
 
             <div class="supplier-modal-tags">
               <template v-for="solution in selectedSupplier.solutionLinks" :key="solution.label">
@@ -176,6 +198,8 @@ const closeSupplierModal = () => {
                   v-if="solution.to"
                   :to="solution.to"
                   class="supplier-solution-tag supplier-solution-tag--link"
+                  :aria-label="`查看 ${solution.label} 方案分類`"
+                  :title="`查看 ${solution.label} 方案分類`"
                   @click="closeSupplierModal"
                 >
                   {{ solution.label }}

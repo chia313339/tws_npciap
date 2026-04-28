@@ -20,32 +20,33 @@ import logo3 from '../assets/logo3.png'
             <dl class="contact-list">
               <div class="contact-row">
                 <dt>諮詢電話</dt>
-                <dd>(02) 2898-7447 分機 86542</dd>
+                <dd><a href="tel:+886228987447;ext=86542" aria-label="撥打諮詢電話 02 2898 7447 分機 86542" title="撥打諮詢電話 02 2898 7447 分機 86542">(02) 2898-7447 分機 86542</a></dd>
               </div>
               <div class="contact-row">
                 <dt>Email</dt>
-                <dd>ntpcai@twcloud.ai</dd>
+                <dd><a href="mailto:ntpcai@twcloud.ai" aria-label="寄信至 ntpcai@twcloud.ai" title="寄信至 ntpcai@twcloud.ai">ntpcai@twcloud.ai</a></dd>
               </div>
             </dl>
           </article>
 
-          <section class="contact-logos" aria-label="Logo 預留區塊">
+          <section class="contact-logos" aria-labelledby="contact-units-heading">
+            <h2 id="contact-units-heading" class="sr-only">主辦與執行單位</h2>
             <div class="logo-row">
               <div class="logo-slot logo-slot--gov">
-                <img :src="logo1" alt="Logo 1" />
+                <img :src="logo1" alt="新北市政府標誌" />
               </div>
               <span class="logo-divider" aria-hidden="true">|</span>
               <div class="logo-unit">
                 <span class="logo-label">主辦單位</span>
                 <div class="logo-slot logo-slot--host">
-                  <img :src="logo2" alt="Logo 2" />
+                  <img :src="logo2" alt="新北市政府經濟發展局標誌" />
                 </div>
               </div>
               <span class="logo-divider" aria-hidden="true">|</span>
               <div class="logo-unit">
                 <span class="logo-label">執行單位</span>
                 <div class="logo-slot logo-slot--executor">
-                  <img :src="logo3" alt="Logo 3" />
+                  <img :src="logo3" alt="台灣智慧雲端服務股份有限公司標誌" />
                 </div>
               </div>
             </div>

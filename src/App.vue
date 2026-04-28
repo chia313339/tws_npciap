@@ -2,7 +2,7 @@
   <div class="app-shell">
     <NavBar />
     <LeftTabs />
-    <main class="main-content">
+    <main id="main-content" class="main-content" aria-label="主要內容">
       <RouterView />
     </main>
   </div>
