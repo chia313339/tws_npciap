@@ -126,16 +126,16 @@ const openSolutionModal = (card) => {
       </section>
       <div class="solution-modal-divider" aria-hidden="true"></div>
       <section class="solution-modal-section solution-modal-section--middle">
-        <h3 class="solution-modal-badge">方案介紹</h3>
+        <p class="solution-modal-badge">方案介紹</p>
         <p class="solution-modal-text">${multilineToHtml(solution.solutionIntro || '')}</p>
-        <h3 class="solution-modal-badge">新北專屬優惠價</h3>
+        <p class="solution-modal-badge">新北專屬優惠價</p>
         <div class="solution-modal-price-box">
           <p class="solution-modal-price-text">${multilineToHtml(solution.specialPrice || '')}</p>
         </div>
       </section>
       <div class="solution-modal-divider" aria-hidden="true"></div>
       <section class="solution-modal-section solution-modal-section--bottom">
-        <h3 class="solution-modal-badge">洽詢聯絡資訊</h3>
+        <p class="solution-modal-badge">洽詢聯絡資訊</p>
         <div class="solution-modal-contact-list">
           ${contactRowsHtml}
         </div>
@@ -204,7 +204,7 @@ const openSolutionModal = (card) => {
       <h2 class="sr-only">{{ title }}方案列表</h2>
 
       <div class="solutions-grid" :class="{ 'solutions-grid--category': mode === 'category' }">
-        <button
+        <article
           v-for="card in items"
           :key="card.id"
           class="solution-card"
@@ -212,21 +212,27 @@ const openSolutionModal = (card) => {
             'solution-card--category-only': mode === 'category',
             'solution-card--vendor-only': mode === 'vendor',
           }"
-          type="button"
-          :aria-label="getCardActionLabel(card)"
-          :title="getCardActionLabel(card)"
-          @click="openSolutionModal(card)"
         >
           <span v-if="mode === 'vendor'" class="solution-image">
             <img :src="card.logo" :alt="`${card.vendorName} 公司標誌`" />
           </span>
 
           <span class="solution-body" :class="{ 'solution-body--category-only': mode === 'category' }">
-            <span v-if="mode === 'category'" class="category-company">{{ card.companyName || card.cardTitle }}</span>
-            <span v-if="mode === 'category'" class="category-solution">{{ card.solutionName }}</span>
-            <span v-if="mode === 'vendor'" class="solution-card-title">{{ card.vendorName }}</span>
+            <h2 v-if="mode === 'category'" class="category-company">{{ card.companyName || card.cardTitle }}</h2>
+            <p v-if="mode === 'category'" class="category-solution">{{ card.solutionName }}</p>
+            <h2 v-if="mode === 'vendor'" class="solution-card-title">{{ card.vendorName }}</h2>
           </span>
-        </button>
+
+          <button
+            type="button"
+            class="solution-card-action"
+            :aria-label="getCardActionLabel(card)"
+            :title="getCardActionLabel(card)"
+            @click="openSolutionModal(card)"
+          >
+            <span class="sr-only">{{ getCardActionLabel(card) }}</span>
+          </button>
+        </article>
 
         <div v-if="items.length === 0" class="empty-state">
           <p>{{ emptyText }}</p>

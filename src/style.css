@@ -995,6 +995,7 @@ button {
 }
 
 .solution-card {
+  position: relative;
   width: 100%;
   background: #ffffff;
   border-radius: 18px;
@@ -1015,7 +1016,28 @@ button {
   box-shadow: 0 18px 36px rgba(28, 30, 127, 0.18);
 }
 
-.solution-card:focus-visible {
+.solution-card-action {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.solution-card-action:hover,
+.solution-card-action:focus,
+.solution-card-action:focus-visible {
+  transform: none;
+}
+
+.solution-card-action:focus {
+  outline: none;
+}
+
+.solution-card-action:focus-visible {
   outline: 3px solid rgba(42, 62, 170, 0.46);
   outline-offset: 2px;
 }
@@ -1048,7 +1070,6 @@ button {
   align-content: start;
 }
 
-.solution-body h3,
 .solution-card-title {
   margin: 0;
   color: var(--primary-dark);
@@ -1624,7 +1645,6 @@ button {
     gap: 8px;
   }
 
-  .solution-body h3,
   .solution-card-title {
     font-size: 1.32rem;
     min-height: 2.7em;

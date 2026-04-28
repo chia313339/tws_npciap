@@ -62,7 +62,7 @@ const highlights = [
           <h2 id="about-highlights-heading" class="sr-only">計畫重點資訊</h2>
           <article v-for="item in highlights" :key="item.title" class="about-highlight-card">
             <header class="about-highlight-head">
-              <h3>{{ item.title }}</h3>
+              <h2>{{ item.title }}</h2>
               <i :class="item.icon" aria-hidden="true"></i>
             </header>
             <div class="about-highlight-body">{{ item.content }}</div>
@@ -163,7 +163,7 @@ const highlights = [
   line-height: 1.2;
 }
 
-.about-highlight-head h3 {
+.about-highlight-head h2 {
   margin: 0;
   color: inherit;
   font: inherit;
