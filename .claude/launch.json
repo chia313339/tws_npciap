@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vite-main",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5194", "--strictPort"],
+      "port": 5194,
+      "cwd": "/Users/lee/Downloads/SAM/tws_npciap"
+    }
+  ]
+}

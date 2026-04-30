@@ -124,4 +124,16 @@ const router = createRouter({
   },
 })
 
+// GA4 SPA 頁面瀏覽追蹤：每次路由切換後送 page_view 事件
+router.afterEach((to) => {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
+    return
+  }
+  window.gtag('event', 'page_view', {
+    page_path: to.fullPath,
+    page_title: document.title,
+    page_location: window.location.href,
+  })
+})
+
 export default router
