@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
 import openingImage from '../assets/opening.png'
 import banner1 from '../assets/banner1.png'
@@ -14,6 +14,7 @@ const banners = [
     title: '政府補助挺你AI轉型',
     alt: '115年度新北產業 AI 化輔導計畫：政府補助挺你 AI 轉型，降低導入門檻，報名時間即日起至 115 年 5 月 15 日。',
     src: banner1,
+    href: 'https://forms.gle/JGYwPfLqZbbPufyo7',
   },
   // { id: 2, title: '首頁輪播 2', src: banner2 },
   // { id: 3, title: '首頁輪播 3', src: banner3 },
@@ -21,11 +22,11 @@ const banners = [
 
 const stage = ref('ready')
 const activeIndex = ref(0)
-const selectedBanner = ref(null)
 const touchStartX = ref(0)
 const touchDeltaX = ref(0)
 const isTouching = ref(false)
-const suppressModalClick = ref(false)
+// 滑動誤觸保護旗標：滑動結束後 250ms 內若有 click 觸發，會被擋下避免意外導向 banner 連結
+const suppressNextClick = ref(false)
 let timerId
 let suppressTimerId
 
@@ -67,26 +68,13 @@ const enterHome = () => {
 //   enterHome()
 // }
 
-const openModal = (banner) => {
-  selectedBanner.value = banner
-}
-
-const onSlideClick = (banner) => {
-  if (suppressModalClick.value) {
-    suppressModalClick.value = false
-    return
-  }
-
-  openModal(banner)
-}
-
-const closeModal = () => {
-  selectedBanner.value = null
-}
-
-const handleKeydown = (event) => {
-  if (event.key === 'Escape') {
-    closeModal()
+// 滑動誤觸保護：滑動後 250ms 內的 click 會 preventDefault 阻止連結跳轉
+const onSlideClick = (event) => {
+  if (suppressNextClick.value) {
+    suppressNextClick.value = false
+    if (event) {
+      event.preventDefault()
+    }
   }
 }
 
@@ -105,15 +93,15 @@ const prevSlide = () => {
   activeIndex.value = (activeIndex.value - 1 + banners.length) % banners.length
 }
 
-const markSuppressModalClick = () => {
-  suppressModalClick.value = true
+const markSuppressNextClick = () => {
+  suppressNextClick.value = true
 
   if (suppressTimerId) {
     window.clearTimeout(suppressTimerId)
   }
 
   suppressTimerId = window.setTimeout(() => {
-    suppressModalClick.value = false
+    suppressNextClick.value = false
     suppressTimerId = undefined
   }, 250)
 }
@@ -152,7 +140,7 @@ const onTouchEnd = () => {
     }
 
     restartAutoPlay()
-    markSuppressModalClick()
+    markSuppressNextClick()
   }
 
   isTouching.value = false
@@ -208,16 +196,11 @@ watch(
 onBeforeUnmount(() => {
   stopAutoPlay()
   setPreHomeState(false)
-  document.removeEventListener('keydown', handleKeydown)
 
   if (suppressTimerId) {
     window.clearTimeout(suppressTimerId)
     suppressTimerId = undefined
   }
-})
-
-onMounted(() => {
-  document.addEventListener('keydown', handleKeydown)
 })
 </script>
 
@@ -250,15 +233,19 @@ onMounted(() => {
           >
             <div class="home-carousel-track" :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
               <figure v-for="banner in banners" :key="banner.id" class="home-carousel-slide">
-                <button
-                  type="button"
+                <a
+                  v-if="banner.href"
+                  :href="banner.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   class="home-slide-trigger"
-                  :aria-label="`放大檢視 ${banner.title}`"
-                  :title="`放大檢視 ${banner.title}`"
-                  @click="onSlideClick(banner)"
+                  :aria-label="`${banner.title}（另開新視窗前往報名表單）`"
+                  :title="`${banner.title}（另開新視窗）`"
+                  @click="onSlideClick($event)"
                 >
                   <img :src="banner.src" :alt="banner.alt || banner.title" />
-                </button>
+                </a>
+                <img v-else class="home-slide-static" :src="banner.src" :alt="banner.alt || banner.title" />
               </figure>
             </div>
           </div>
@@ -325,15 +312,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <div v-if="selectedBanner" class="banner-modal" role="dialog" aria-modal="true" aria-labelledby="banner-modal-title" @click.self="closeModal">
-      <div class="banner-modal-content">
-        <h2 id="banner-modal-title" class="sr-only">{{ selectedBanner.title }}</h2>
-        <button type="button" class="banner-modal-close" aria-label="關閉圖片放大" title="關閉圖片放大" @click="closeModal">
-          ×
-        </button>
-        <img :src="selectedBanner.src" :alt="selectedBanner.alt || selectedBanner.title" />
-      </div>
-    </div>
   </section>
 </template>
 
@@ -564,49 +542,11 @@ onMounted(() => {
   transform: scale(1.04);
 }
 
-.banner-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 2300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(8, 12, 34, 0.82);
-  backdrop-filter: blur(8px);
-}
-
-.banner-modal-content {
-  position: relative;
-  width: min(1200px, 94vw);
-  max-height: 88dvh;
-  display: grid;
-  place-items: center;
-}
-
-.banner-modal-content img {
-  max-width: 100%;
-  max-height: 90dvh;
+.home-slide-static {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  border-radius: 10px;
-}
-
-.banner-modal-close {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: rgba(14, 23, 68, 0.86);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  font-size: 1.6rem;
-  line-height: 1;
-}
-
-.banner-modal-close:hover {
-  background: rgba(27, 42, 120, 0.9);
 }
 
 @media (max-width: 900px) {
@@ -657,16 +597,6 @@ onMounted(() => {
 
   .home-carousel-viewport {
     width: min(100%, 92vw);
-  }
-
-  .banner-modal {
-    padding: 16px;
-  }
-
-  .banner-modal-close {
-    width: 36px;
-    height: 36px;
-    font-size: 1.4rem;
   }
 }
 </style>
