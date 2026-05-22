@@ -14,7 +14,7 @@ const banners = [
     title: '政府補助挺你AI轉型',
     alt: '115年度新北產業 AI 化輔導計畫：政府補助挺你 AI 轉型，降低導入門檻，報名時間即日起至 115 年 5 月 15 日。',
     src: banner1,
-    href: 'https://forms.gle/JGYwPfLqZbbPufyo7',
+    to: '/about',
   },
   // { id: 2, title: '首頁輪播 2', src: banner2 },
   // { id: 3, title: '首頁輪播 3', src: banner3 },
@@ -69,12 +69,18 @@ const enterHome = () => {
 // }
 
 // 滑動誤觸保護：滑動後 250ms 內的 click 會 preventDefault 阻止連結跳轉
-const onSlideClick = (event) => {
+const onSlideClick = (event, navigate) => {
   if (suppressNextClick.value) {
     suppressNextClick.value = false
     if (event) {
       event.preventDefault()
     }
+
+    return
+  }
+
+  if (navigate) {
+    navigate(event)
   }
 }
 
@@ -233,13 +239,29 @@ onBeforeUnmount(() => {
           >
             <div class="home-carousel-track" :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
               <figure v-for="banner in banners" :key="banner.id" class="home-carousel-slide">
+                <RouterLink
+                  v-if="banner.to"
+                  :to="banner.to"
+                  custom
+                  v-slot="{ href, navigate }"
+                >
+                  <a
+                    :href="href"
+                    class="home-slide-trigger"
+                    :aria-label="`${banner.title}（前往關於計畫）`"
+                    :title="`${banner.title}（前往關於計畫）`"
+                    @click="onSlideClick($event, navigate)"
+                  >
+                    <img :src="banner.src" :alt="banner.alt || banner.title" />
+                  </a>
+                </RouterLink>
                 <a
-                  v-if="banner.href"
+                  v-else-if="banner.href"
                   :href="banner.href"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="home-slide-trigger"
-                  :aria-label="`${banner.title}（另開新視窗前往報名表單）`"
+                  :aria-label="`${banner.title}（另開新視窗）`"
                   :title="`${banner.title}（另開新視窗）`"
                   @click="onSlideClick($event)"
                 >
@@ -391,7 +413,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .home-carousel-indicators {
