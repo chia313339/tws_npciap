@@ -18,7 +18,7 @@ const highlights = [
   {
     title: '申請時間',
     icon: 'fa-solid fa-clock',
-    content: '即日起至115年5月15日止',
+    content: '即日起按月分批審查制經費用罄為止\n5/16～6/15 第二梯次 \n 6/16～7/15 第三梯次 \n以此類推',
   },
 ]
 </script>
@@ -181,6 +181,7 @@ const highlights = [
   font-weight: 800;
   line-height: 1.45;
   padding: 16px 14px;
+  white-space: pre-line;
 }
 
 .about-note {
