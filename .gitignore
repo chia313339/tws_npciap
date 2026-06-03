@@ -20,3 +20,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# 機密資安文件不進版控（業主弱點 SOP 含內部 IP/弱點清單，避免洩漏到 GitHub）
+docs/*.pdf
