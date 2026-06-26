@@ -34,6 +34,19 @@ const enhanceWebchatAccessibility = () => {
     chatPopup.setAttribute('role', 'dialog')
     chatPopup.setAttribute('aria-label', '新北經發 AI 小幫手對話視窗')
   }
+
+  // WCAG 4.1.3：對話訊息區標記 role=log，讓語音軟體依序報讀新訊息（外部元件，盡力比對容器）
+  const chatLog =
+    document.querySelector('#chat-box') ||
+    document.querySelector('#chat-popup .chatgpt-messages') ||
+    document.querySelector('#chat-messages') ||
+    document.querySelector('#chat-popup [class*="messages"]')
+
+  if (chatLog && chatLog.getAttribute('role') !== 'log') {
+    chatLog.setAttribute('role', 'log')
+    chatLog.setAttribute('aria-live', 'polite')
+    chatLog.setAttribute('aria-label', '對話訊息')
+  }
 }
 
 if (typeof window !== 'undefined') {

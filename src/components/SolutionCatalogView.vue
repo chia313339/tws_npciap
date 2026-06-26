@@ -59,9 +59,11 @@ const buildContactRow = ({ label, value, href = '', linkLabel = '' }) => {
   const text = String(value || '').trim()
   if (!text) return ''
 
-  const linkTargetAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener noreferrer"' : ''
+  const isExternal = /^https?:\/\//i.test(href)
+  const linkTargetAttrs = isExternal ? ' target="_blank" rel="noopener noreferrer"' : ''
+  const externalIcon = isExternal ? '<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>' : ''
   const content = href
-    ? `<a class="solution-modal-contact-link" href="${escapeHtml(href)}"${linkTargetAttrs} aria-label="${escapeHtml(linkLabel || `${label}：${text}`)}" title="${escapeHtml(linkLabel || `${label}：${text}`)}">${escapeHtml(text)}</a>`
+    ? `<a class="solution-modal-contact-link" href="${escapeHtml(href)}"${linkTargetAttrs} aria-label="${escapeHtml(linkLabel || `${label}：${text}`)}" title="${escapeHtml(linkLabel || `${label}：${text}`)}">${escapeHtml(text)}${externalIcon}</a>`
     : `<span class="solution-modal-contact-value">${escapeHtml(text)}</span>`
 
   return `
@@ -83,7 +85,7 @@ const openSolutionModal = (card) => {
   const imageAlt = `${solutionTitle} 示意圖`
   const manualButtonLabel = `開啟「${solutionTitle}」操作說明（另開新視窗）`
   const manualButton = manualUrl
-    ? `<a class="solution-modal-manual-btn" href="${escapeHtml(manualUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(manualButtonLabel)}" title="${escapeHtml(manualButtonLabel)}">點擊看「操作說明」<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></a>`
+    ? `<a class="solution-modal-manual-btn" href="${escapeHtml(manualUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(manualButtonLabel)}" title="${escapeHtml(manualButtonLabel)}">點擊看「操作說明」<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`
     : '<span class="solution-modal-manual-btn solution-modal-manual-btn--disabled" aria-disabled="true">尚無操作說明<i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i></span>'
 
   const contactRowsHtml = [

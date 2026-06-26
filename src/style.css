@@ -67,6 +67,61 @@ button:hover {
   transform: scale(1.03);
 }
 
+/* ===== 無障礙:全站鍵盤焦點樣式(WCAG 1.4.1 焦點可見)===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #1c1e7f;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* 深色導覽列上的焦點改用高亮色,確保在深底可見 */
+.site-nav a:focus-visible,
+.site-nav button:focus-visible,
+.menu-toggle:focus-visible {
+  outline-color: #ffd34d;
+  outline-offset: 3px;
+}
+
+/* 開場深色背景上的按鈕 / 輪播焦點 */
+.enter-home-btn:focus-visible,
+.home-slide-trigger:focus-visible,
+.home-indicator:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ===== 無障礙:跳到主要內容 / 快速連結(WCAG 2.4.1 跳過區塊 / 2.4.5 多種方式)===== */
+.skip-links a {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 3000;
+  padding: 10px 16px;
+  background: #1c1e7f;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 0 0 8px 0;
+  white-space: nowrap;
+}
+
+.skip-links a:focus {
+  left: 0;
+}
+
+/* 外部連結「另開新視窗」可見圖示(WCAG 3.2.5)*/
+.external-link-icon {
+  font-size: 0.72em;
+  margin-left: 6px;
+  vertical-align: baseline;
+}
+
 .hover-scale {
   display: inline-flex;
   align-items: center;
@@ -462,7 +517,7 @@ button {
 }
 
 .left-tab--palette-1 {
-  background: #549ae6;
+  background: #1f6fc0; /* WCAG 1.4.6:原 #549ae6 白字僅 2.94:1,加深至 ~5.1:1 */
 }
 
 .left-tab--palette-2 {
@@ -474,7 +529,7 @@ button {
 }
 
 .left-tab--muted {
-  background: #aeb0b5;
+  background: #6c6f78; /* WCAG 1.4.6:原 #aeb0b5 白字僅 2.17:1,加深至 ~5.0:1 */
 }
 
 .left-tab.router-link-active {

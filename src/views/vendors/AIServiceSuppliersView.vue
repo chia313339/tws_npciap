@@ -124,7 +124,7 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
             <img
               v-if="supplier.logo"
               :src="supplier.logo"
-              :alt="`${supplier.companyShortName} 公司標誌`"
+              alt=""
             />
             <span v-else class="vendor-logo-placeholder">LOGO</span>
           </span>
@@ -170,7 +170,7 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
               <img
                 v-if="selectedSupplier.logo"
                 :src="selectedSupplier.logo"
-                :alt="`${selectedSupplier.companyShortName} 公司標誌`"
+                alt=""
               />
               <span v-else class="vendor-logo-placeholder">LOGO</span>
             </div>
@@ -184,7 +184,7 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
               :aria-label="getSupplierWebsiteLabel(selectedSupplier)"
               :title="getSupplierWebsiteLabel(selectedSupplier)"
             >
-              官網
+              官網<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
             </a>
           </aside>
 

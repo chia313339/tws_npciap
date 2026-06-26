@@ -40,7 +40,7 @@ const highlights = [
             aria-label="開啟申請須知與申請表（另開新視窗）"
             title="開啟申請須知與申請表（另開新視窗）"
           >
-            申請須知與申請表
+            申請須知與申請表<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
           </a>
         </header>
 

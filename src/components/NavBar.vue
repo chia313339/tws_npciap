@@ -6,6 +6,7 @@ import { categoryNavItems } from '../data/catalogData'
 const isOpen = ref(false)
 const isMobileCategoryOpen = ref(false)
 const navRoot = ref(null)
+const menuToggle = ref(null)
 const route = useRoute()
 
 const sideLinks = [
@@ -26,6 +27,7 @@ const mainLinks = [
   { label: '聯絡我們', to: '/contact-us' },
   { label: '即刻申請', to: '/about' },
   { label: '搜尋', to: '/search' },
+  { label: '網站導覽', to: '/sitemap' },
 ]
 
 const mobileLinks = computed(() => [...sideLinks, ...mainLinks])
@@ -58,12 +60,34 @@ const handleOutsidePointer = (event) => {
   }
 }
 
+// WCAG 2.1.2:Esc 關閉行動版選單,並把焦點還給漢堡鈕
+const handleKeydown = (event) => {
+  if (event.key === 'Escape' && isOpen.value) {
+    closeMobileMenu()
+    menuToggle.value?.focus()
+  }
+}
+
+// WCAG 2.1.2:焦點離開導覽列即關閉,避免鍵盤使用者被選單困住
+const handleFocusOut = () => {
+  if (!isOpen.value) {
+    return
+  }
+  requestAnimationFrame(() => {
+    if (navRoot.value && !navRoot.value.contains(document.activeElement)) {
+      closeMobileMenu()
+    }
+  })
+}
+
 onMounted(() => {
   document.addEventListener('pointerdown', handleOutsidePointer)
+  document.addEventListener('keydown', handleKeydown)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('pointerdown', handleOutsidePointer)
+  document.removeEventListener('keydown', handleKeydown)
 })
 
 watch(
@@ -75,7 +99,7 @@ watch(
 </script>
 
 <template>
-  <header ref="navRoot" class="site-nav">
+  <header ref="navRoot" class="site-nav" @focusout="handleFocusOut">
     <div class="container nav-inner">
       <RouterLink class="brand hover-scale" to="/" aria-label="返回首頁：新北產業 AI 化輔導計畫" title="返回首頁">
         <span class="brand-title">
@@ -119,7 +143,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}
+            {{ link.label }}<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">
@@ -129,6 +153,7 @@ watch(
       </nav>
 
       <button
+        ref="menuToggle"
         class="menu-toggle hover-scale"
         type="button"
         aria-label="切換主要導覽選單"
@@ -189,7 +214,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}
+            {{ link.label }}<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">

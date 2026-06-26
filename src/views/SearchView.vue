@@ -211,6 +211,15 @@ const searchResults = computed(() => {
     excerpt: createExcerpt(item.content, normalizedQuery.value),
   }))
 })
+
+const statusMessage = computed(() => {
+  if (!normalizedQuery.value) {
+    return ''
+  }
+  return searchResults.value.length > 0
+    ? `找到 ${searchResults.value.length} 筆符合「${normalizedQuery.value}」的結果`
+    : `查無符合「${normalizedQuery.value}」的頁面`
+})
 </script>
 
 <template>
@@ -241,6 +250,7 @@ const searchResults = computed(() => {
 
       <div class="search-results">
         <h2 class="sr-only">搜尋結果</h2>
+        <p class="sr-only" role="status" aria-live="polite">{{ statusMessage }}</p>
         <p v-if="!normalizedQuery" class="search-hint">請輸入關鍵字搜尋網站頁面。</p>
         <p v-else-if="searchResults.length === 0" class="search-hint">查無符合頁面，請嘗試其他關鍵字。</p>
 
