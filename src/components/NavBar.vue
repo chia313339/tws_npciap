@@ -143,7 +143,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}<span class="external-hint">（另開新視窗）</span>
+            {{ link.label }}
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">
@@ -214,7 +214,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}<span class="external-hint">（另開新視窗）</span>
+            {{ link.label }}
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">
