@@ -139,6 +139,14 @@ button:hover {
   white-space: nowrap;
 }
 
+/* 導覽列外部連結:小型「另開新視窗」圖示(較省空間,仍為可見提示)*/
+.nav-external-icon {
+  font-size: 0.6em;
+  margin-left: 5px;
+  vertical-align: 0.35em;
+  opacity: 0.9;
+}
+
 /* 漢堡鈕焦點:強化為不會誤認的高亮環(WCAG 2.1.2 / 1.4.1)*/
 .menu-toggle:focus-visible {
   outline: 3px solid #ffd34d;
