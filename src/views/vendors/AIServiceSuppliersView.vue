@@ -184,7 +184,7 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
               :aria-label="getSupplierWebsiteLabel(selectedSupplier)"
               :title="getSupplierWebsiteLabel(selectedSupplier)"
             >
-              官網<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+              官網<span class="external-hint">（另開新視窗）</span>
             </a>
           </aside>
 

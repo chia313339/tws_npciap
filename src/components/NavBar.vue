@@ -143,7 +143,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+            {{ link.label }}<span class="external-hint">（另開新視窗）</span>
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">
@@ -214,7 +214,7 @@ watch(
             :aria-label="`${link.label}（另開新視窗）`"
             :title="`${link.label}（另開新視窗）`"
           >
-            {{ link.label }}<i class="fa-solid fa-arrow-up-right-from-square external-link-icon" aria-hidden="true"></i>
+            {{ link.label }}<span class="external-hint">（另開新視窗）</span>
           </a>
 
           <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">

@@ -10,10 +10,21 @@ const enhanceWebchatAccessibility = () => {
   const chatIcon = document.getElementById('chat-icon')
   const chatPopup = document.getElementById('chat-popup')
 
+  const isPopupOpen = () =>
+    !!chatPopup &&
+    chatPopup.offsetWidth > 0 &&
+    chatPopup.offsetHeight > 0 &&
+    getComputedStyle(chatPopup).display !== 'none' &&
+    getComputedStyle(chatPopup).visibility !== 'hidden'
+
   if (chatIcon) {
-    const label = '開啟新北經發 AI 小幫手'
+    // WCAG 4.1.2：名稱、角色、值——按鈕需暴露開啟/關閉狀態
+    const open = isPopupOpen()
+    const label = open ? '關閉新北經發 AI 小幫手對話視窗' : '開啟新北經發 AI 小幫手對話視窗'
     chatIcon.setAttribute('aria-label', label)
     chatIcon.setAttribute('title', label)
+    chatIcon.setAttribute('aria-expanded', String(open))
+    chatIcon.setAttribute('aria-haspopup', 'dialog')
 
     if (!['A', 'BUTTON'].includes(chatIcon.tagName)) {
       chatIcon.setAttribute('role', 'button')
@@ -33,6 +44,21 @@ const enhanceWebchatAccessibility = () => {
   if (chatPopup) {
     chatPopup.setAttribute('role', 'dialog')
     chatPopup.setAttribute('aria-label', '新北經發 AI 小幫手對話視窗')
+
+    // 監看對話視窗開/關，即時更新按鈕的 aria-expanded 與名稱（WCAG 4.1.2 值變更通知）
+    if (!chatPopup.dataset.a11yStateObserved && 'MutationObserver' in window) {
+      const stateObserver = new window.MutationObserver(() => {
+        const icon = document.getElementById('chat-icon')
+        if (!icon) return
+        const isOpen = isPopupOpen()
+        const lbl = isOpen ? '關閉新北經發 AI 小幫手對話視窗' : '開啟新北經發 AI 小幫手對話視窗'
+        icon.setAttribute('aria-expanded', String(isOpen))
+        icon.setAttribute('aria-label', lbl)
+        icon.setAttribute('title', lbl)
+      })
+      stateObserver.observe(chatPopup, { attributes: true, attributeFilter: ['style', 'class'] })
+      chatPopup.dataset.a11yStateObserved = 'true'
+    }
   }
 
   // WCAG 4.1.3：對話訊息區標記 role=log，讓語音軟體依序報讀新訊息（外部元件，盡力比對容器）

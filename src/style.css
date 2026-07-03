@@ -115,11 +115,26 @@ summary:focus-visible,
   left: 0;
 }
 
-/* 外部連結「另開新視窗」可見圖示(WCAG 3.2.5)*/
+/* 外部連結「另開新視窗」可見圖示 + 文字提示(WCAG 3.2.5)*/
 .external-link-icon {
   font-size: 0.72em;
   margin-left: 6px;
   vertical-align: baseline;
+}
+
+.external-hint {
+  font-size: 0.78em;
+  font-weight: 600;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+/* 漢堡鈕焦點:強化為不會誤認的高亮環(WCAG 2.1.2 / 1.4.1)*/
+.menu-toggle:focus-visible {
+  outline: 3px solid #ffd34d;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 77, 0.45);
+  border-radius: 6px;
 }
 
 .hover-scale {
@@ -498,8 +513,9 @@ button {
 }
 
 .left-tab:focus-visible {
-  outline: 3px solid rgba(27, 44, 149, 0.8);
-  outline-offset: -7px;
+  outline: 3px solid #ffffff;
+  outline-offset: -6px;
+  box-shadow: 0 0 0 6px rgba(28, 30, 127, 0.55);
 }
 
 .left-tab--stack-1 {
@@ -1016,7 +1032,8 @@ button {
 }
 
 .search-input:focus {
-  outline: 2px solid rgba(28, 30, 127, 0.2);
+  outline: 3px solid #1c1e7f;
+  outline-offset: 2px;
 }
 
 .quick-tags {
@@ -1093,7 +1110,7 @@ button {
 }
 
 .solution-card-action:focus-visible {
-  outline: 3px solid rgba(42, 62, 170, 0.46);
+  outline: 3px solid #1c1e7f;
   outline-offset: 2px;
 }
 
