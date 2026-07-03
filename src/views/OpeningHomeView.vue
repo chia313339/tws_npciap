@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import openingImage from '../assets/opening.png'
 import banner1 from '../assets/banner1.png'
@@ -40,8 +40,30 @@ const isReadyStage = computed(() => stage.value === 'ready')
 //   { id: 'other', label: '其他企業', value: '否' },
 // ]
 
+const enterBtn = ref(null)
+
 const enterHome = () => {
   stage.value = 'home'
+  // 關閉開場遮罩後,把焦點移到主要內容,維持鍵盤操作連貫
+  nextTick(() => {
+    document.getElementById('main-content')?.focus()
+  })
+}
+
+// 開場遮罩(modal)顯示時,焦點鎖定在「開始探索」按鈕:
+// 進首頁時它即為焦點,且 Tab 不會跑到被遮罩蓋住的背景元素(WCAG 焦點管理)
+const focusEnterButton = () => {
+  nextTick(() => {
+    enterBtn.value?.focus({ focusVisible: true })
+  })
+}
+
+const handleOverlayKeydown = (event) => {
+  if (!isOverlayVisible.value || event.key !== 'Tab') {
+    return
+  }
+  event.preventDefault()
+  enterBtn.value?.focus({ focusVisible: true })
 }
 
 // const submitEnterpriseChoice = (value) => {
@@ -199,9 +221,17 @@ watch(
   { immediate: true }
 )
 
+onMounted(() => {
+  if (isOverlayVisible.value) {
+    focusEnterButton()
+  }
+  document.addEventListener('keydown', handleOverlayKeydown, true)
+})
+
 onBeforeUnmount(() => {
   stopAutoPlay()
   setPreHomeState(false)
+  document.removeEventListener('keydown', handleOverlayKeydown, true)
 
   if (suppressTimerId) {
     window.clearTimeout(suppressTimerId)
@@ -322,6 +352,7 @@ onBeforeUnmount(() => {
           </div>
           -->
           <button
+            ref="enterBtn"
             type="button"
             class="enter-home-btn pulse-glow"
             aria-label="開始探索新北產業 AI 化輔導計畫網站"
