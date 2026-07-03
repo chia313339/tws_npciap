@@ -67,18 +67,27 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* ===== 無障礙:全站鍵盤焦點樣式(WCAG 1.4.1 焦點可見)===== */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-summary:focus-visible,
-[tabindex]:focus-visible,
-[role="button"]:focus-visible {
-  outline: 3px solid #1c1e7f;
+/* ===== 無障礙:全站統一「顯眼黃色」鍵盤焦點框(WCAG 1.4.1 焦點可見)===== */
+/* 黃框 + 深色光暈:在深底、淺底皆達足夠對比;z-index 提升層級,避免焦點框被相鄰或堆疊元素遮住 */
+:focus-visible {
+  outline: 3px solid #ffd400 !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.75) !important;
+  z-index: 100 !important;
+}
+
+/* 方案卡片:覆蓋式按鈕填滿卡片,而卡片 overflow:hidden 會裁切按鈕的焦點框,
+   故改把焦點框畫在「卡片本身」(元素自身 outline 不受自身 overflow 裁切),並提升層級。 */
+.solution-card-action:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.solution-card:focus-within {
+  outline: 3px solid #ffd400;
   outline-offset: 2px;
-  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.75);
+  z-index: 100;
 }
 
 /* 深色導覽列上的焦點改用高亮色,確保在深底可見 */
@@ -113,6 +122,7 @@ summary:focus-visible,
 
 .skip-links a:focus {
   left: 0;
+  z-index: 3000 !important;
 }
 
 /* 外部連結「另開新視窗」可見圖示 + 文字提示(WCAG 3.2.5)*/
@@ -1032,8 +1042,9 @@ button {
 }
 
 .search-input:focus {
-  outline: 3px solid #1c1e7f;
+  outline: 3px solid #ffd400;
   outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.75);
 }
 
 .quick-tags {
