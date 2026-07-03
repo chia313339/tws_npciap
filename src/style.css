@@ -116,13 +116,18 @@ button:hover {
   background: #1c1e7f;
   color: #ffffff;
   font-weight: 700;
-  border-radius: 0 0 8px 0;
+  border-radius: 8px;
   white-space: nowrap;
 }
 
+/* 焦點時從角落內縮,讓黃色焦點框完整可見(不被視窗邊緣/overflow 裁切),並給明確的框 */
 .skip-links a:focus {
-  left: 0;
+  left: 10px;
+  top: 10px;
   z-index: 3000 !important;
+  outline: 3px solid #ffd400;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.75);
 }
 
 /* 外部連結「另開新視窗」可見圖示 + 文字提示(WCAG 3.2.5)*/
