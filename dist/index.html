@@ -53,6 +53,14 @@
         background-position: center !important;
         border: none !important;
         box-shadow: none !important;
+        /* chatbot 一直保持在最上層:ID 選擇器蓋過全站 :focus-visible 的 z-index:100,
+           聚焦時也不會掉到導覽列(z-index:1000)後面被遮住 */
+        z-index: 9999 !important;
+      }
+
+      /* 聚焦時給明顯的深色光暈(蓋過上面的 box-shadow:none),搭配全站黃色焦點框更醒目 */
+      #chat-icon:focus-visible {
+        box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.75) !important;
       }
 
       #chat-icon.corner-bottom-right {
