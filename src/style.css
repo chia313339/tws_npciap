@@ -438,16 +438,20 @@ button {
   width: 100%;
   max-height: 0;
   overflow: hidden;
+  /* WCAG 2.1.2:收合時不可被鍵盤 Tab 聚焦(同手機主選單) */
+  visibility: hidden;
   display: grid;
   grid-template-columns: 1fr;
   gap: 6px;
   padding: 0 8px;
-  transition: max-height 0.25s ease, padding 0.25s ease;
+  transition: max-height 0.25s ease, padding 0.25s ease, visibility 0s linear 0.25s;
 }
 
 .mobile-submenu.open {
   max-height: 640px;
   padding: 2px 8px 10px;
+  visibility: visible;
+  transition: max-height 0.25s ease, padding 0.25s ease, visibility 0s;
 }
 
 .mobile-submenu-link {
@@ -1633,13 +1637,18 @@ button {
     gap: 6px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    /* WCAG 2.1.2:收合時 visibility:hidden,讓選單內連結不可被鍵盤 Tab 聚焦
+       (否則焦點會跑進看不見的收合選單,使用者不知焦點所在)。延遲隱藏以保留收合動畫。 */
+    visibility: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease, visibility 0s linear 0.3s;
     border-bottom: 1px solid rgba(255, 255, 255, 0.28);
   }
 
   .nav-links--mobile.open {
     max-height: 860px;
     padding: 12px 24px 18px;
+    visibility: visible;
+    transition: max-height 0.3s ease, padding 0.3s ease, visibility 0s;
   }
 
   .nav-separator {
