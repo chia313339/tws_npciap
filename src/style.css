@@ -106,6 +106,37 @@ button:hover {
   outline-offset: 3px;
 }
 
+/* ===== 無障礙:尊重「減少動態」系統偏好(WCAG 2.3.3 互動產生的動畫 / 補強 2.2.2)=====
+   當使用者於作業系統開啟「減少動態 / 減少動畫」時,關閉全站非必要動效
+   (hover 縮放、開場按鈕脈動、輪播位移、各類 transition 與平滑捲動),
+   避免誘發前庭功能障礙者的不適。焦點框等「必要」視覺提示不受影響。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* hover 放大改為靜態(不位移),避免版面跳動 */
+  a:hover,
+  button:hover,
+  .hover-scale:hover,
+  .solution-card:hover,
+  .faq-trigger:hover .faq-question,
+  .enter-home-btn:hover {
+    transform: none !important;
+  }
+
+  /* 開場「開始探索」按鈕的無限脈動完全停止 */
+  .pulse-glow {
+    animation: none !important;
+  }
+}
+
 /* ===== 無障礙:跳到主要內容 / 快速連結(WCAG 2.4.1 跳過區塊 / 2.4.5 多種方式)===== */
 .skip-links a {
   position: absolute;
@@ -1645,7 +1676,15 @@ button {
   }
 
   .nav-links--mobile.open {
-    max-height: 860px;
+    /* WCAG 2.1.2 / 2.4.3 / 2.4.7:選單在 fixed 導覽列內、且為 position:absolute,
+       原本 overflow:hidden + 固定 max-height 會把超出的連結裁切到視窗外,
+       但它們仍可被鍵盤 Tab 聚焦、又無法捲動抵達(焦點跑進看不見的內容)。
+       改為限制在「視窗可見高度」內並允許內部捲動,聚焦時瀏覽器會自動把該連結捲入視野。 */
+    max-height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     padding: 12px 24px 18px;
     visibility: visible;
     transition: max-height 0.3s ease, padding 0.3s ease, visibility 0s;

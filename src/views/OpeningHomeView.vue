@@ -336,7 +336,7 @@ onBeforeUnmount(() => {
       <div class="opening-stage">
         <div v-if="isReadyStage" class="ready-content">
           <h2 id="opening-title" class="ready-title">{{ pageTitle }}</h2>
-          <p id="opening-subtitle" class="ready-subtitle">New Taipei City Industrial AI Mentoring Program</p>
+          <p id="opening-subtitle" class="ready-subtitle" lang="en">New Taipei City Industrial AI Mentoring Program</p>
           <!-- 暫存需求：保留雙按鈕版本 -->
           <!--
           <div class="entry-actions">
@@ -454,14 +454,31 @@ onBeforeUnmount(() => {
   gap: 10px;
 }
 
+/* WCAG 2.5.8:點擊目標至少 24×24px。外框為透明可點區,視覺圓點以 ::before 繪製,外觀不變 */
 .home-indicator {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 999px;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.home-indicator::before {
+  content: '';
+  flex: 0 0 auto; /* 不被 24px 外框壓縮,維持原本 11px / active 34px 視覺 */
   width: 11px;
   height: 11px;
   border-radius: 999px;
   background: rgba(33, 54, 150, 0.34);
+  transition: width 0.2s ease, background 0.2s ease;
 }
 
-.home-indicator.active {
+.home-indicator.active::before {
   width: 34px;
   background: #2038a9;
 }

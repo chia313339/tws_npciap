@@ -55,7 +55,12 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior() {
-    return { top: 0, behavior: 'smooth' }
+    // WCAG 2.3.3:系統開啟「減少動態」時,改用瞬間捲動而非平滑捲動
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    return { top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' }
   },
 })
 
