@@ -1,6 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
+import { createFocusTrap } from '../../utils/focusTrap'
 import vendorCompanies from '../../data/vendorCompanies.generated.json'
 import metadataRows from '../../data/metadata.generated.json'
 import { categoryNavItems } from '../../data/catalogData'
@@ -82,6 +83,10 @@ const changePage = (index) => {
   currentPage.value = index
 }
 
+const supplierModal = ref(null)
+const supplierModalClose = ref(null)
+let releaseFocusTrap = null
+
 const openSupplierModal = (supplier) => {
   selectedSupplier.value = supplier
 }
@@ -89,6 +94,41 @@ const openSupplierModal = (supplier) => {
 const closeSupplierModal = () => {
   selectedSupplier.value = null
 }
+
+// 點方案標籤會導覽到分類頁,原觸發卡片將隨本頁卸載而消失,
+// 焦點無處可還 → 明確交給新頁面的主要內容(WCAG 2.4.3)
+const handleSolutionTagClick = () => {
+  closeSupplierModal()
+  nextTick(() => {
+    document.getElementById('main-content')?.focus()
+  })
+}
+
+// 對話框開啟/關閉時掛上、解除焦點鎖:
+// 開啟後焦點進入對話框(關閉鍵),Tab 只在對話框內循環,Esc 可關閉,
+// 關閉後焦點自動還回原本觸發的供應商卡片(WCAG 2.1.2 / 2.4.3 / 2.4.7)
+watch(selectedSupplier, (supplier) => {
+  if (supplier) {
+    nextTick(() => {
+      if (!supplierModal.value) {
+        return
+      }
+      releaseFocusTrap = createFocusTrap(supplierModal.value, {
+        onEscape: closeSupplierModal,
+        initialFocus: supplierModalClose.value,
+      })
+    })
+    return
+  }
+
+  releaseFocusTrap?.()
+  releaseFocusTrap = null
+})
+
+onBeforeUnmount(() => {
+  releaseFocusTrap?.()
+  releaseFocusTrap = null
+})
 
 const getSupplierName = (supplier) => supplier.companyName || supplier.companyShortName || 'AI服務供應商'
 
@@ -154,13 +194,15 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
   <Teleport to="body">
     <div v-if="selectedSupplier" class="supplier-modal-backdrop" @click.self="closeSupplierModal">
       <article
+        ref="supplierModal"
         class="supplier-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="supplier-modal-title"
         aria-describedby="supplier-modal-intro"
+        tabindex="-1"
       >
-        <button class="supplier-modal-close" type="button" aria-label="關閉供應商詳細資訊" title="關閉供應商詳細資訊" @click="closeSupplierModal">
+        <button ref="supplierModalClose" class="supplier-modal-close" type="button" aria-label="關閉供應商詳細資訊" title="關閉供應商詳細資訊" @click="closeSupplierModal">
           <i class="fa-solid fa-xmark" aria-hidden="true"></i>
         </button>
 
@@ -200,7 +242,7 @@ const getSupplierWebsiteLabel = (supplier) => `前往 ${getSupplierName(supplier
                   class="supplier-solution-tag supplier-solution-tag--link"
                   :aria-label="`查看 ${solution.label} 方案分類`"
                   :title="`查看 ${solution.label} 方案分類`"
-                  @click="closeSupplierModal"
+                  @click="handleSolutionTagClick"
                 >
                   {{ solution.label }}
                 </RouterLink>

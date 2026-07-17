@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { categoryNavItems } from '../data/catalogData'
 
@@ -8,6 +8,13 @@ const isMobileCategoryOpen = ref(false)
 const navRoot = ref(null)
 const menuToggle = ref(null)
 const route = useRoute()
+
+// 桌機「方案分類」子選單以 CSS :hover / :focus-within 開合。
+// 選取子項目後,滑鼠仍懸停在原處(或焦點仍在選單內),CSS 條件持續成立 → 子選單不會收合。
+// 這個旗標用來「強制收合」,覆寫 CSS 的開啟條件(WCAG 2.4.3 焦點順序 / 1.4.13 可關閉)。
+const isDesktopSubmenuDismissed = ref(false)
+// 是否正懸停在下拉區:決定焦點離開時可否解除強制收合(滑鼠還在原處就不能解除,否則 :hover 會讓它立刻重開)
+const isDesktopDropdownHovered = ref(false)
 
 const sideLinks = [
   { label: '關於計畫', to: '/about' },
@@ -45,6 +52,49 @@ const toggleMobileCategory = () => {
   isMobileCategoryOpen.value = !isMobileCategoryOpen.value
 }
 
+// 導覽後把焦點交給主要內容:避免焦點留在已收合(不可見)的選單連結上(WCAG 2.4.7),
+// 並讓螢幕報讀器宣讀新頁面的主要內容區
+const focusMainContent = () => {
+  nextTick(() => {
+    document.getElementById('main-content')?.focus()
+  })
+}
+
+// 桌機:點選子選單項目後強制收合。同路由(無導覽事件)時也適用
+const handleDesktopSubmenuLinkClick = () => {
+  isDesktopSubmenuDismissed.value = true
+  focusMainContent()
+}
+
+const handleDesktopDropdownEnter = () => {
+  isDesktopDropdownHovered.value = true
+  // 新的一次滑鼠懸停 = 使用者想再開啟,解除強制收合
+  isDesktopSubmenuDismissed.value = false
+}
+
+const handleDesktopDropdownLeave = () => {
+  isDesktopDropdownHovered.value = false
+  isDesktopSubmenuDismissed.value = false
+}
+
+// 焦點離開下拉區時解除強制收合,以便下次聚焦能正常開啟;
+// 但滑鼠仍懸停在原處時不可解除,否則 :hover 會立刻把它重新打開
+const handleDesktopDropdownFocusOut = (event) => {
+  const dropdown = event.currentTarget
+  const next = event.relatedTarget
+  if (next instanceof Node && dropdown.contains(next)) {
+    return
+  }
+  if (!isDesktopDropdownHovered.value) {
+    isDesktopSubmenuDismissed.value = false
+  }
+}
+
+// 行動版:點選選單內任一連結後,焦點交給主要內容(選單收合後該連結會變成不可見)
+const handleMobileLinkClick = () => {
+  focusMainContent()
+}
+
 const closeMobileMenu = () => {
   isOpen.value = false
   isMobileCategoryOpen.value = false
@@ -60,12 +110,35 @@ const handleOutsidePointer = (event) => {
   }
 }
 
-// WCAG 2.1.2:Esc 關閉行動版選單,並把焦點還給漢堡鈕
+// WCAG 2.1.2(無鍵盤陷阱)/ 1.4.13(懸停或聚焦產生的內容須可關閉):
+// Esc 逐層收合,每收一層就把焦點交還給該層的觸發元件,焦點不會落在已隱藏的元素上
 const handleKeydown = (event) => {
-  if (event.key === 'Escape' && isOpen.value) {
-    closeMobileMenu()
-    menuToggle.value?.focus()
+  if (event.key !== 'Escape') {
+    return
   }
+
+  // 桌機:焦點在「方案分類」下拉區內 → 收合子選單,焦點回到「方案分類」連結
+  const dropdown = navRoot.value?.querySelector('.nav-dropdown')
+  if (dropdown && dropdown.contains(document.activeElement) && !isDesktopSubmenuDismissed.value) {
+    isDesktopSubmenuDismissed.value = true
+    dropdown.querySelector('.nav-link--dropdown')?.focus()
+    return
+  }
+
+  if (!isOpen.value) {
+    return
+  }
+
+  // 行動版:先收子選單(焦點回到展開鈕),再按一次才收整個選單(焦點回到漢堡鈕)。
+  // 用查詢而非 template ref:此按鈕位於 v-for 內,Vue 會把 ref 收集成陣列而非單一元素
+  if (isMobileCategoryOpen.value) {
+    isMobileCategoryOpen.value = false
+    navRoot.value?.querySelector('.mobile-submenu-toggle')?.focus()
+    return
+  }
+
+  closeMobileMenu()
+  menuToggle.value?.focus()
 }
 
 // WCAG 2.1.2/2.4.7:焦點離開導覽列即關閉選單,避免鍵盤使用者被困住、
@@ -104,6 +177,8 @@ watch(
   () => route.path,
   () => {
     closeMobileMenu()
+    // 導覽完成後強制收合桌機子選單(滑鼠可能仍停在原處讓 :hover 持續成立)
+    isDesktopSubmenuDismissed.value = true
   }
 )
 </script>
@@ -122,12 +197,20 @@ watch(
         <template v-for="(link, index) in mainLinks" :key="link.to || link.href">
           <span v-if="index > 0" class="nav-separator">|</span>
 
-          <div v-if="link.children" class="nav-dropdown">
+          <div
+            v-if="link.children"
+            class="nav-dropdown"
+            :class="{ 'nav-dropdown--dismissed': isDesktopSubmenuDismissed }"
+            @mouseenter="handleDesktopDropdownEnter"
+            @mouseleave="handleDesktopDropdownLeave"
+            @focusout="handleDesktopDropdownFocusOut"
+          >
             <RouterLink
               class="nav-link nav-link--dropdown hover-scale"
               :class="{ 'router-link-active': isCategoryRoute }"
               :to="link.to"
               :title="link.label"
+              @click="handleDesktopSubmenuLinkClick"
             >
               {{ link.label }}
             </RouterLink>
@@ -138,6 +221,7 @@ watch(
                 class="nav-submenu-link"
                 :to="child.to"
                 :title="child.label"
+                @click="handleDesktopSubmenuLinkClick"
               >
                 {{ child.label }}
               </RouterLink>
@@ -186,6 +270,7 @@ watch(
                 :class="{ 'router-link-active': isCategoryRoute }"
                 :to="link.to"
                 :title="link.label"
+                @click="handleMobileLinkClick"
               >
                 {{ link.label }}
               </RouterLink>
@@ -209,6 +294,7 @@ watch(
                 class="mobile-submenu-link"
                 :to="child.to"
                 :title="child.label"
+                @click="handleMobileLinkClick"
               >
                 {{ child.label }}
               </RouterLink>
@@ -227,7 +313,7 @@ watch(
             {{ link.label }}<span class="external-hint">（另開新視窗）</span>
           </a>
 
-          <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label">
+          <RouterLink v-else class="nav-link hover-scale" :to="link.to" :title="link.label" @click="handleMobileLinkClick">
             {{ link.label }}
           </RouterLink>
         </template>

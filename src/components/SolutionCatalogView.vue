@@ -1,6 +1,7 @@
 <script setup>
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import { createFocusTrap } from '../utils/focusTrap'
 
 const props = defineProps({
   title: {
@@ -173,20 +174,44 @@ const openSolutionModal = (card) => {
       const lightboxCloseBtn = popup.querySelector('[data-modal-lightbox-close]')
 
       if (imageTrigger && lightbox && imageUrl) {
+        // 圖片預覽是疊在方案 modal 之上的第二層對話框:同樣需要焦點鎖與 Esc 關閉,
+        // 否則 Tab 會跑回被蓋住的 modal,使用者走不到關閉鍵(WCAG 2.1.2 / 2.4.3)
+        let releaseLightboxTrap = null
+
+        const closeLightbox = () => {
+          lightbox.setAttribute('hidden', '')
+          releaseLightboxTrap?.()
+          releaseLightboxTrap = null
+        }
+
         imageTrigger.addEventListener('click', () => {
           lightbox.removeAttribute('hidden')
+          lightbox.setAttribute('role', 'dialog')
+          lightbox.setAttribute('aria-modal', 'true')
+          lightbox.setAttribute('aria-label', imageAlt)
+          releaseLightboxTrap = createFocusTrap(lightbox, {
+            onEscape: closeLightbox,
+            initialFocus: lightboxCloseBtn,
+          })
         })
 
         lightbox.addEventListener('click', (event) => {
           if (event.target === lightbox) {
-            lightbox.setAttribute('hidden', '')
+            closeLightbox()
           }
         })
 
-        lightboxCloseBtn?.addEventListener('click', () => {
-          lightbox.setAttribute('hidden', '')
+        lightboxCloseBtn?.addEventListener('click', closeLightbox)
+
+        // modal 被關閉時(含按 Esc / 點背景),殘留的燈箱焦點鎖必須一併解除
+        popup.addEventListener('a11y:cleanup', () => {
+          releaseLightboxTrap?.()
+          releaseLightboxTrap = null
         })
       }
+    },
+    willClose: (popup) => {
+      popup.dispatchEvent(new CustomEvent('a11y:cleanup'))
     },
   })
 }

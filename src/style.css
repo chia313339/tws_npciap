@@ -98,12 +98,29 @@ button:hover {
   outline-offset: 3px;
 }
 
-/* 開場深色背景上的按鈕 / 輪播焦點 */
+/* 開場深色背景上的按鈕 / 輪播指示器焦點 */
 .enter-home-btn:focus-visible,
-.home-slide-trigger:focus-visible,
 .home-indicator:focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 3px;
+}
+
+/* 首頁 banner:連結填滿輪播 viewport,而 viewport 為 overflow:hidden,
+   會把畫在元素外側的焦點框與外陰影整個裁掉(與 .solution-card 同一個坑)。
+   改為把黃框畫在元素「內側」(負 outline-offset)並用 inset 陰影,
+   兩者都在元素框內,不受祖先 overflow 裁切,焦點始終明顯可見(WCAG 2.4.7)。 */
+.home-slide-trigger:focus-visible {
+  outline: 4px solid #ffd400 !important;
+  outline-offset: -8px !important;
+  box-shadow:
+    inset 0 0 0 12px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 16px rgba(255, 212, 0, 0.9) !important;
+}
+
+/* 快速連結容器本身僅供程式化聚焦重設 Tab 起點,不應顯示焦點框 */
+.skip-links:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ===== 無障礙:尊重「減少動態」系統偏好(WCAG 2.3.3 互動產生的動畫 / 補強 2.2.2)=====
@@ -394,6 +411,16 @@ button {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+/* 強制收合(按 Esc、或選取子項目導覽後):覆寫上面的 :hover / :focus-within 開啟條件。
+   visibility:hidden 讓子選單連結同時退出 Tab 順序,
+   焦點不會落在看不見的連結上(WCAG 2.4.3 / 2.4.7 / 1.4.13 可關閉)。 */
+.nav-dropdown--dismissed .nav-submenu {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transform: translateY(8px) !important;
 }
 
 .nav-submenu-link {

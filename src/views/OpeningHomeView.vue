@@ -42,21 +42,32 @@ const isReadyStage = computed(() => stage.value === 'ready')
 
 const enterBtn = ref(null)
 
-const enterHome = () => {
+// 關閉開場遮罩。focusTarget:
+//  'top'  — 焦點還原到文件開頭(.skip-links),讓後續 Tab 從畫面最上方依序往下:
+//           快速連結 → 側邊頁籤(桌機)/漢堡鈕(行動) → 主要內容 → 導覽列。
+//           若改為直接聚焦 #main-content,Tab 會從內容中間接續,跳過側邊頁籤與導覽列(WCAG 2.4.3)
+//  'main' — 使用者按了「跳到主要內容」,依其意圖直接落在主要內容
+const closeOverlay = (focusTarget) => {
   stage.value = 'home'
-  // 關閉開場遮罩後,把焦點移到主要內容,維持鍵盤操作連貫
   nextTick(() => {
-    document.getElementById('main-content')?.focus()
+    const target =
+      focusTarget === 'main' ? document.getElementById('main-content') : document.querySelector('.skip-links')
+    target?.focus()
   })
 }
 
-// WCAG 2.4.3 焦點順序:開場遮罩顯示時,不預先搶焦點,
-// 讓鍵盤使用者從網址列按第一下 Tab 就落在「跳到主要內容」快速連結(全站第一個焦點)。
-// Tab 循環限制在「skip links(z-index 3000,聚焦時浮在遮罩上方)→ 開始探索」之間,
-// 不會跑進被遮罩蓋住的背景導覽/內容(WCAG 2.4.7 焦點可見)。
+const enterHome = () => {
+  closeOverlay('top')
+}
+
+// WCAG 2.4.3 焦點順序:開場遮罩是覆蓋全頁的對話框(role=dialog),
+// 載入時不預先搶焦點,讓使用者從網址列按第一下 Tab 就落在對話框唯一的動作按鈕「開始探索」。
+// 快速連結緊接其後,因此在「所有內容連結」中仍是第一個(意見書要求),
+// 且聚焦時 z-index 3000 會浮在遮罩上方,焦點始終可見(WCAG 2.4.7)。
+// Tab 循環限制在這幾個元素之間,不會跑進被遮罩蓋住的背景導覽/內容。
 const getOverlayTabbables = () => {
   const skipLinks = Array.from(document.querySelectorAll('.skip-links a'))
-  return enterBtn.value ? [...skipLinks, enterBtn.value] : skipLinks
+  return enterBtn.value ? [enterBtn.value, ...skipLinks] : skipLinks
 }
 
 const handleOverlayKeydown = (event) => {
@@ -83,7 +94,7 @@ const handleOverlayKeydown = (event) => {
 let skipToMainLink = null
 const handleSkipToMainActivate = () => {
   if (isOverlayVisible.value) {
-    enterHome()
+    closeOverlay('main')
   }
 }
 

@@ -1,6 +1,8 @@
 <template>
   <div class="app-shell">
-    <nav class="skip-links" aria-label="無障礙快速連結">
+    <!-- tabindex="-1":供程式化聚焦用(如關閉開場遮罩後),
+         聚焦於此=把 Tab 起點重設到文件開頭,下一次 Tab 即為「跳到主要內容」(WCAG 2.4.3) -->
+    <nav class="skip-links" aria-label="無障礙快速連結" tabindex="-1">
       <a href="#main-content" accesskey="C" @click="focusMainContent">跳到主要內容</a>
       <RouterLink to="/sitemap">網站導覽</RouterLink>
       <RouterLink to="/search" accesskey="S">站內搜尋</RouterLink>
