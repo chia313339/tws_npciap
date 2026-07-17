@@ -50,20 +50,41 @@ const enterHome = () => {
   })
 }
 
-// 開場遮罩(modal)顯示時,焦點鎖定在「開始探索」按鈕:
-// 進首頁時它即為焦點,且 Tab 不會跑到被遮罩蓋住的背景元素(WCAG 焦點管理)
-const focusEnterButton = () => {
-  nextTick(() => {
-    enterBtn.value?.focus({ focusVisible: true })
-  })
+// WCAG 2.4.3 焦點順序:開場遮罩顯示時,不預先搶焦點,
+// 讓鍵盤使用者從網址列按第一下 Tab 就落在「跳到主要內容」快速連結(全站第一個焦點)。
+// Tab 循環限制在「skip links(z-index 3000,聚焦時浮在遮罩上方)→ 開始探索」之間,
+// 不會跑進被遮罩蓋住的背景導覽/內容(WCAG 2.4.7 焦點可見)。
+const getOverlayTabbables = () => {
+  const skipLinks = Array.from(document.querySelectorAll('.skip-links a'))
+  return enterBtn.value ? [...skipLinks, enterBtn.value] : skipLinks
 }
 
 const handleOverlayKeydown = (event) => {
   if (!isOverlayVisible.value || event.key !== 'Tab') {
     return
   }
+
+  const tabbables = getOverlayTabbables()
+  if (!tabbables.length) {
+    return
+  }
+
   event.preventDefault()
-  enterBtn.value?.focus({ focusVisible: true })
+  const currentIndex = tabbables.indexOf(document.activeElement)
+  const lastIndex = tabbables.length - 1
+  const nextIndex = event.shiftKey
+    ? (currentIndex <= 0 ? lastIndex : currentIndex - 1)
+    : (currentIndex === -1 || currentIndex === lastIndex ? 0 : currentIndex + 1)
+  tabbables[nextIndex]?.focus({ focusVisible: true })
+}
+
+// 「跳到主要內容」快速連結在遮罩顯示時被啟用(滑鼠點擊或鍵盤 Enter 皆觸發 click)
+// → 視同進站,關閉遮罩讓主要內容真正可及(WCAG 2.4.1/2.4.3)
+let skipToMainLink = null
+const handleSkipToMainActivate = () => {
+  if (isOverlayVisible.value) {
+    enterHome()
+  }
 }
 
 // const submitEnterpriseChoice = (value) => {
@@ -222,16 +243,17 @@ watch(
 )
 
 onMounted(() => {
-  if (isOverlayVisible.value) {
-    focusEnterButton()
-  }
   document.addEventListener('keydown', handleOverlayKeydown, true)
+  skipToMainLink = document.querySelector('.skip-links a[href="#main-content"]')
+  skipToMainLink?.addEventListener('click', handleSkipToMainActivate)
 })
 
 onBeforeUnmount(() => {
   stopAutoPlay()
   setPreHomeState(false)
   document.removeEventListener('keydown', handleOverlayKeydown, true)
+  skipToMainLink?.removeEventListener('click', handleSkipToMainActivate)
+  skipToMainLink = null
 
   if (suppressTimerId) {
     window.clearTimeout(suppressTimerId)
@@ -321,11 +343,12 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <!-- 不用 aria-modal:鍵盤 Tab 循環包含遮罩外的 skip links(無障礙快速連結需為第一個焦點,WCAG 2.4.3),
+         aria-modal 會讓螢幕報讀器忽略聚焦中的 skip link -->
     <div
       v-if="isOverlayVisible"
       class="opening-overlay"
       role="dialog"
-      aria-modal="true"
       aria-labelledby="opening-title"
       aria-describedby="opening-subtitle"
     >
