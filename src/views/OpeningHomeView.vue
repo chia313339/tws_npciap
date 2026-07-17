@@ -60,14 +60,16 @@ const enterHome = () => {
   closeOverlay('top')
 }
 
-// WCAG 2.4.3 焦點順序:開場遮罩是覆蓋全頁的對話框(role=dialog),
-// 載入時不預先搶焦點,讓使用者從網址列按第一下 Tab 就落在對話框唯一的動作按鈕「開始探索」。
-// 快速連結緊接其後,因此在「所有內容連結」中仍是第一個(意見書要求),
-// 且聚焦時 z-index 3000 會浮在遮罩上方,焦點始終可見(WCAG 2.4.7)。
+// WCAG 2.4.3 焦點順序:載入時不預先搶焦點,讓使用者從網址列按第一下 Tab
+// 就落在「跳到主要內容」快速連結——它位於畫面左上角,符合意見書要求的
+// 「快速連結為所有內容連結的第一個」與「由上至下、由左至右」。
+// 「開始探索」排在快速連結之後(它是畫面上第一個「可見」的控制項,
+// 快速連結在聚焦前是隱藏的,故視覺上並不衝突)。
+// 快速連結聚焦時 z-index 3000 會浮在遮罩上方,焦點始終可見(WCAG 2.4.7)。
 // Tab 循環限制在這幾個元素之間,不會跑進被遮罩蓋住的背景導覽/內容。
 const getOverlayTabbables = () => {
   const skipLinks = Array.from(document.querySelectorAll('.skip-links a'))
-  return enterBtn.value ? [enterBtn.value, ...skipLinks] : skipLinks
+  return enterBtn.value ? [...skipLinks, enterBtn.value] : skipLinks
 }
 
 const handleOverlayKeydown = (event) => {
