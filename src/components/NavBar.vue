@@ -77,6 +77,17 @@ const handleDesktopDropdownLeave = () => {
   isDesktopSubmenuDismissed.value = false
 }
 
+// 焦點從外部進入下拉區(鍵盤 Tab 到「方案分類」)= 使用者主動要開啟,解除強制收合。
+// 少了這段,導覽或按 Esc 之後 dismissed 會一直是 true,
+// 鍵盤使用者 Tab 到「方案分類」時子選單不會展開,10 個分類連結整組跳過(WCAG 2.4.3)
+const handleDesktopDropdownFocusIn = (event) => {
+  const from = event.relatedTarget
+  if (from instanceof Node && event.currentTarget.contains(from)) {
+    return
+  }
+  isDesktopSubmenuDismissed.value = false
+}
+
 // 焦點離開下拉區時解除強制收合,以便下次聚焦能正常開啟;
 // 但滑鼠仍懸停在原處時不可解除,否則 :hover 會立刻把它重新打開
 const handleDesktopDropdownFocusOut = (event) => {
@@ -173,12 +184,14 @@ onBeforeUnmount(() => {
   document.removeEventListener('keydown', handleKeydown)
 })
 
+// 桌機子選單的強制收合不放在這裡:router 初始導覽也會觸發本 watcher
+// (path 由 '/' 變為實際路由),會讓子選單一載入就處於強制收合狀態。
+// 「選取後收合」已由 handleDesktopSubmenuLinkClick 處理,
+// 滑鼠移往其他連結則會觸發 mouseleave,兩者已覆蓋所有導覽路徑。
 watch(
   () => route.path,
   () => {
     closeMobileMenu()
-    // 導覽完成後強制收合桌機子選單(滑鼠可能仍停在原處讓 :hover 持續成立)
-    isDesktopSubmenuDismissed.value = true
   }
 )
 </script>
@@ -203,6 +216,7 @@ watch(
             :class="{ 'nav-dropdown--dismissed': isDesktopSubmenuDismissed }"
             @mouseenter="handleDesktopDropdownEnter"
             @mouseleave="handleDesktopDropdownLeave"
+            @focusin="handleDesktopDropdownFocusIn"
             @focusout="handleDesktopDropdownFocusOut"
           >
             <RouterLink
