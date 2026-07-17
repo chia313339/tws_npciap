@@ -185,6 +185,9 @@ const openSolutionModal = (card) => {
         }
 
         imageTrigger.addEventListener('click', () => {
+          // 先解除既有的焦點鎖再建新的:否則舊 trap 的 document 監聽會被覆寫成孤兒,
+          // 永遠不會被解除(closeLightbox 只解得掉最後一個)
+          releaseLightboxTrap?.()
           lightbox.removeAttribute('hidden')
           lightbox.setAttribute('role', 'dialog')
           lightbox.setAttribute('aria-modal', 'true')

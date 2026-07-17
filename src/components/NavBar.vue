@@ -72,9 +72,14 @@ const handleDesktopDropdownEnter = () => {
   isDesktopSubmenuDismissed.value = false
 }
 
-const handleDesktopDropdownLeave = () => {
+const handleDesktopDropdownLeave = (event) => {
   isDesktopDropdownHovered.value = false
-  isDesktopSubmenuDismissed.value = false
+  // 焦點仍在下拉區內時不可解除:使用者剛按 Esc 收合、焦點停在「方案分類」上,
+  // 一解除 :focus-within 就會讓子選單自己彈回來(WCAG 1.4.13 可關閉失效)。
+  // 這種情況留給 focusout 處理(焦點離開時滑鼠已不在區內,屆時才解除)
+  if (!event.currentTarget.contains(document.activeElement)) {
+    isDesktopSubmenuDismissed.value = false
+  }
 }
 
 // 焦點從外部進入下拉區(鍵盤 Tab 到「方案分類」)= 使用者主動要開啟,解除強制收合。

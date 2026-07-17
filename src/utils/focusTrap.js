@@ -13,11 +13,12 @@ const FOCUSABLE_SELECTOR = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',')
 
-// 只取「真正可聚焦」的元素:排除 display:none / visibility:hidden / 尺寸為 0 者
-const getFocusable = (container) =>
-  Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
-    (el) => el.getClientRects().length > 0 && window.getComputedStyle(el).visibility !== 'hidden'
-  )
+// 元素是否真的顯示中(排除 display:none / visibility:hidden / 尺寸為 0 / 已從 DOM 移除)
+const isVisible = (el) =>
+  el.isConnected && el.getClientRects().length > 0 && window.getComputedStyle(el).visibility !== 'hidden'
+
+// 只取「真正可聚焦」的元素
+const getFocusable = (container) => Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter(isVisible)
 
 /**
  * 為對話框加上焦點鎖。
@@ -31,6 +32,13 @@ export const createFocusTrap = (container, { onEscape, initialFocus } = {}) => {
 
   const handleKeydown = (event) => {
     if (event.key !== 'Escape' && event.key !== 'Tab') {
+      return
+    }
+
+    // 安全閥:對話框已關閉/從 DOM 移除,但本 trap 因故未被解除時,絕不可攔截按鍵。
+    // 否則遺留的監聽會把全站每一次 Tab/Esc 都 preventDefault 掉卻不移動焦點,
+    // 整個網站的鍵盤操作永久失效,且 SPA 換頁也救不回來(WCAG 2.1.2 鍵盤陷阱)。
+    if (!isVisible(container)) {
       return
     }
 
