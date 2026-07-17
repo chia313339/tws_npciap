@@ -68,16 +68,26 @@ const handleKeydown = (event) => {
   }
 }
 
-// WCAG 2.1.2:焦點離開導覽列即關閉,避免鍵盤使用者被選單困住
-const handleFocusOut = () => {
-  if (!isOpen.value) {
+// WCAG 2.1.2/2.4.7:焦點離開導覽列即關閉選單,避免鍵盤使用者被困住、
+// 或焦點落在被展開選單遮住的內容上。優先用 relatedTarget 同步判斷
+// (focusout 當下 activeElement 尚未更新);為 null 時退回 setTimeout
+// (不用 requestAnimationFrame:背景/節流分頁不觸發繪製,rAF 可能永不執行)
+const handleFocusOut = (event) => {
+  if (!isOpen.value || !navRoot.value) {
     return
   }
-  requestAnimationFrame(() => {
-    if (navRoot.value && !navRoot.value.contains(document.activeElement)) {
+  const next = event.relatedTarget
+  if (next instanceof Node) {
+    if (!navRoot.value.contains(next)) {
       closeMobileMenu()
     }
-  })
+    return
+  }
+  setTimeout(() => {
+    if (isOpen.value && navRoot.value && !navRoot.value.contains(document.activeElement)) {
+      closeMobileMenu()
+    }
+  }, 0)
 }
 
 onMounted(() => {
