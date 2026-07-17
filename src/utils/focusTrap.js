@@ -30,13 +30,19 @@ export const createFocusTrap = (container, { onEscape, initialFocus } = {}) => {
   const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null
 
   const handleKeydown = (event) => {
-    if (event.key === 'Escape') {
-      event.preventDefault()
-      onEscape?.()
+    if (event.key !== 'Escape' && event.key !== 'Tab') {
       return
     }
 
-    if (event.key !== 'Tab') {
+    // 此對話框是目前最上層,Esc/Tab 由它獨佔處理:阻止事件傳到底層對話框的處理器。
+    // 沒有這行,巢狀對話框(方案 modal 內開圖片燈箱)會與 SweetAlert2 掛在 popup 上的
+    // Tab 處理器互搶焦點——本 trap 先把焦點拉回燈箱,SweetAlert2 隨即又把它推回底層 modal,
+    // 焦點因而逃出燈箱。
+    event.stopPropagation()
+
+    if (event.key === 'Escape') {
+      event.preventDefault()
+      onEscape?.()
       return
     }
 
