@@ -405,8 +405,9 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+/* 首頁刻意不捲動:高度需扣掉導覽列與頁尾(無障礙標章),否則會擠出捲軸 */
 .opening-home {
-  height: calc(100dvh - var(--nav-height) - 68px);
+  height: calc(100dvh - var(--nav-height) - var(--footer-height) - 68px);
   padding: 8px 0 0;
   overflow: hidden;
 }
@@ -657,7 +658,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 900px) {
   .opening-home {
-    height: calc(100dvh - var(--nav-height) - 52px);
+    height: calc(100dvh - var(--nav-height) - var(--footer-height) - 52px);
     padding-top: 4px;
   }
 

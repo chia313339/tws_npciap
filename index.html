@@ -75,6 +75,17 @@
         bottom: 20px !important;
       }
 
+      /* 桌機導覽列固定在畫面底部,且導覽列最右端放了無障礙標章。
+         客服圖示 z-index 9999 壓在最上層,若停在原位會蓋住標章使其無法點擊,
+         故桌機時整個上移到導覽列上方(行動版導覽列改置頂,不受影響)。
+         --nav-height 由 style.css 的 :root 定義,樣式尚未載入時退回 82px */
+      @media (min-width: 901px) {
+        #chat-icon.corner-bottom-right,
+        #chat-icon.corner-bottom-left {
+          bottom: calc(var(--nav-height, 82px) + 21px) !important;
+        }
+      }
+
       @media (max-width: 768px), (pointer: coarse) and (orientation: landscape) and (max-width: 1024px) {
         #chat-icon.corner-bottom-right {
           right: 16px !important;

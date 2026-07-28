@@ -2,6 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { categoryNavItems } from '../data/catalogData'
+import AccessibilityBadge from './AccessibilityBadge.vue'
 
 const isOpen = ref(false)
 const isMobileCategoryOpen = ref(false)
@@ -263,6 +264,10 @@ watch(
             {{ link.label }}
           </RouterLink>
         </template>
+
+        <!-- 無障礙標章(桌機):排在「網站導覽」之後,僅顯示標章圖 -->
+        <span class="nav-separator">|</span>
+        <AccessibilityBadge />
       </nav>
 
       <button

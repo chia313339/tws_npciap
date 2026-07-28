@@ -14,8 +14,8 @@
       // SPA：關閉自動 page_view，改由 vue-router 的 afterEach 統一發送
       gtag('config', 'G-40EWVEJ9TF', { send_page_view: false });
     </script>
-    <script type="module" crossorigin src="/assets/index-CvT6MGJX.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D2cQ2Eam.css">
+    <script type="module" crossorigin src="/assets/index-Ce1zk1eJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-XFgJAlY3.css">
   </head>
   <body>
     <div id="app">
@@ -75,6 +75,17 @@
         left: 20px !important;
         right: auto !important;
         bottom: 20px !important;
+      }
+
+      /* 桌機導覽列固定在畫面底部,且導覽列最右端放了無障礙標章。
+         客服圖示 z-index 9999 壓在最上層,若停在原位會蓋住標章使其無法點擊,
+         故桌機時整個上移到導覽列上方(行動版導覽列改置頂,不受影響)。
+         --nav-height 由 style.css 的 :root 定義,樣式尚未載入時退回 82px */
+      @media (min-width: 901px) {
+        #chat-icon.corner-bottom-right,
+        #chat-icon.corner-bottom-left {
+          bottom: calc(var(--nav-height, 82px) + 21px) !important;
+        }
       }
 
       @media (max-width: 768px), (pointer: coarse) and (orientation: landscape) and (max-width: 1024px) {

@@ -16,6 +16,9 @@
       <Breadcrumb />
       <RouterView />
     </main>
+    <!-- 無障礙標章:桌機放在導覽列(NavBar「網站導覽」之後),行動版改放每頁最下方。
+         頁尾置於 main 之外——<footer> 巢狀在 <main> 內不會被視為 contentinfo 地標 -->
+    <SiteFooter v-if="isMobileNav" />
     <NavBar v-if="!isMobileNav" />
   </div>
 </template>
@@ -25,6 +28,7 @@ import { RouterView, RouterLink } from 'vue-router'
 import NavBar from './components/NavBar.vue'
 import LeftTabs from './components/LeftTabs.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
+import SiteFooter from './components/SiteFooter.vue'
 
 // 與 style.css 導覽列切換頂/底的斷點(max-width: 900px)保持一致
 const mobileNavQuery = window.matchMedia('(max-width: 900px)')

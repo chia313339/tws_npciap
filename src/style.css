@@ -13,6 +13,9 @@
   --shadow: 0 20px 45px rgba(28, 30, 127, 0.15);
   --nav-height: 82px;
   --side-tabs-width: 88px;
+  /* 行動版頁尾(無障礙標章)的高度;桌機無頁尾故為 0。
+     首頁採滿版不捲動版面,其高度要扣掉頁尾才不會擠出捲軸 */
+  --footer-height: 0px;
   --nav-side-slot: clamp(220px, 22vw, 280px);
 
   color: var(--text);
@@ -239,6 +242,45 @@ button {
   padding-top: 36px;
   padding-left: calc(var(--side-tabs-width) + 26px);
   padding-bottom: calc(var(--nav-height) + 30px + env(safe-area-inset-bottom));
+}
+
+/* ===== 無障礙標章(桌機在導覽列、行動版在每頁最下方,共用同一個元件)===== */
+/* 標章尺寸依核發辦法固定為 88x31,不得縮放;
+   一併關閉全站 a:hover 的 scale,避免游標移入時標章被放大 */
+.a11y-badge {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.a11y-badge img {
+  display: block;
+  width: 88px;
+  height: 31px;
+  border: 0;
+}
+
+.a11y-badge:hover {
+  transform: none;
+}
+
+/* ===== 頁尾:僅行動版掛載(App.vue v-if),內容只有無障礙標章 ===== */
+.site-footer {
+  display: flex;
+  align-items: center;
+  min-height: var(--footer-height);
+  background: var(--soft);
+  border-top: 1px solid var(--border);
+}
+
+/* 需比 .container 更具體:.container 的 padding 簡寫在本規則之後,
+   同分特異性下會把上下 padding 歸零 */
+.site-footer .footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 12px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
 }
 
 .container {
@@ -640,7 +682,10 @@ button {
   transition-property: transform, box-shadow;
 }
 
-@media (max-width: 1280px) {
+/* 導覽列的「緊湊模式」。原本的斷點是 1280px,因導覽列末端新增了無障礙標章,
+   寬鬆版排版約需 1440px 以上才容得下(連結為 nowrap,不會自動縮),
+   故一併上調斷點,避免 1281~1440px 之間標章被擠出畫面右緣 */
+@media (max-width: 1440px) {
   :root {
     --nav-side-slot: clamp(170px, 18vw, 230px);
   }
@@ -655,6 +700,19 @@ button {
 
   .nav-link {
     font-size: clamp(0.74rem, 0.58rem + 0.45vw, 1.12rem);
+  }
+}
+
+/* 桌機最窄的一段(901px 起,再窄就換成行動版導覽列)。
+   導覽列末端多了無障礙標章,此區間空間最吃緊,需再收緊品牌左邊距與分隔線間距,
+   否則標章會被擠出畫面右緣(連結為 nowrap,只能靠縮小間隔挪位) */
+@media (min-width: 901px) and (max-width: 1000px) {
+  .brand {
+    margin-left: 40px;
+  }
+
+  .nav-separator {
+    margin: 0 4px;
   }
 }
 
@@ -1633,6 +1691,11 @@ button {
 }
 
 @media (max-width: 900px) {
+  :root {
+    /* 12px 上下留白 + 31px 標章 + 1px 上框線 */
+    --footer-height: 56px;
+  }
+
   .main-content {
     padding-top: calc(var(--nav-height) + 10px);
     padding-left: 0;
