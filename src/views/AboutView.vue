@@ -18,7 +18,7 @@ const highlights = [
   {
     title: '申請時間',
     icon: 'fa-solid fa-clock',
-    content: '即日起按月分批審查，原則於每月15日下午5時截止收件，進行當月批次審查，經費用罄即停止受理'},
+    content: '本年度補助經費用罄，已截止徵件'},
 ]
 </script>
 
